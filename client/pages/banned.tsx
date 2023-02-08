@@ -1,5 +1,4 @@
 import getConfig from "next/config";
-import Link from "next/link";
 import React from "react";
 
 import AppWrapper from "../components/AppWrapper";
@@ -24,9 +23,9 @@ const BannedPage = () => {
         <H4 textAlign="center" normal>
           {"Ha a "}
           {publicRuntimeConfig.SITE_NAME}{" által rövidített linken spam-et vagy malware-t találsz, "}
-          <Link href="/report">
-            <ALink title="Send report">{"Küldj nekünk bejelentést!"}</ALink>
-          </Link>
+          <ALink href="/report" title="Küldj nekünk bejelentést" isNextLink>
+            {"Küldj nekünk bejelentést"}
+          </ALink>
           .
         </H4>
       </Col>
