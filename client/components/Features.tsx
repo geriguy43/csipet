@@ -1,10 +1,10 @@
 import React from "react";
 import { Flex } from "rebass/styled-components";
-import Link from "next/link";
+import ALink from "../components/ALink";
 import FeaturesItem from "./FeaturesItem";
 import { ColCenterH } from "./Layout";
 import { Colors } from "../consts";
-import { H3 } from "./Text";
+import { H3, H4 } from "./Text";
 
 const Features = () => (
   <ColCenterH
@@ -13,12 +13,14 @@ const Features = () => (
     py={[64, 100]}
     backgroundColor={Colors.FeaturesBg}
   >
-    <H3 fontSize={[26, 28]} mb={72} mx={15} light>
-      {"Újdonság! Küldj AES256 titkosítású, önmegsemmisülő üzenetet vagy fájlt 2 MB-ig"}<br/>
-      <Link href="/login" title="login / signup">
-      HTTPS://TITOK.CSI.PET
-      </Link>
+    <H3 textAlign="center" fontSize={[26, 28]} mb={72} mx={15} light>
+      {"Újdonság! Küldj AES256 titkosítású, önmegsemmisülő üzenetet vagy fájlt 2 MB-ig"}
     </H3>
+    <H4 textAlign="center" fontSize={[26, 28]} mb={72} mx={15} light>
+          <ALink href="https://titok.csi.pet" title="titok.csi.pet" isNextLink>
+          TITOK.CSI.PET
+          </ALink>
+    </H4>
     <Flex
       width={1200}
       maxWidth="100%"
