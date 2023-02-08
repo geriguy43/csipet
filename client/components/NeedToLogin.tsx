@@ -63,7 +63,7 @@ const NeedToLogin = () => (
       mb={[32, 32, 0]}
     >
       <Title>
-        {"Szerkesztsd és rövidítsd "}<b>linkjeidet,</b>{" nézd meg kattintási statisztikáidat!"}
+        {"Szerkesztsd és rövidítsd "}<b>linkjeidet,</b>{" nézd meg kattintási statisztikáidat! "}<b>QR</b>{" kód vagy "}<b>jelszavas</b>{" védelem? Egyedi végződés? CSIPET-nek ez sem probléma."}
       </Title>
       <Link href="/login" title="Bejelentkezés / regisztráció">
         <Button>{"Bejelentkezés/regisztráció"}</Button>
