@@ -145,6 +145,13 @@ export const editLink = [
     .withMessage("Ez az URL érvénytelen")
     .custom(value => removeWww(URL.parse(value).host) !== env.DEFAULT_DOMAIN)
     .withMessage(`${env.DEFAULT_DOMAIN} URLs are not allowed.`),
+    body("password")
+    .optional({ nullable: true, checkFalsy: true })
+    .custom(checkUser)
+    .withMessage("Csak regisztrált felhasználók használhatják ezt a mezőt")
+    .isString()
+    .isLength({ min: 3, max: 64 })
+    .withMessage("A jelszónak 3 és 64 karakter közötti hosszúságúnak kell lennie."),
   body("address")
     .optional({ checkFalsy: true, nullable: true })
     .isString()
