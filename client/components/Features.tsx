@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "rebass/styled-components";
-
+import Link from "next/link";
 import FeaturesItem from "./FeaturesItem";
 import { ColCenterH } from "./Layout";
 import { Colors } from "../consts";
