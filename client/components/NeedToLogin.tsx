@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { Flex } from "reflexbox/styled-components";
+import { Flex } from "rebass/styled-components";
 
 import { Button } from "./Button";
 import { fadeIn } from "../helpers/animations";
@@ -65,13 +65,10 @@ const NeedToLogin = () => (
       <Title>
         {"Szerkesztsd és rövidítsd "}<b>linkjeidet,</b>{" nézd meg kattintási statisztikáidat!"}
       </Title>
-      <Link href="/login">
-        <a href="/login" title="login / signup">
-          <Button>{"Bejelentkezés / Regisztráció"}</Button>
-        </a>
-      </Link>
+      <Link href="/login" title="Bejelentkezés / regisztráció">
+        <Button>{"Bejelentkezés/regisztráció"}</Button>
     </Col>
-    <Image src="/images/callout.png" />
+    <Image src="/images/callout.png" alt="hívókép"  />
   </Wrapper>
 );
 
