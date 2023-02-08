@@ -1,11 +1,10 @@
-import { Box, Flex } from "reflexbox/styled-components";
+import { Box, Flex } from "rebass/styled-components";
 import React, { useState, useEffect } from "react";
 import formatDate from "date-fns/format";
 import setDefaultOptions from 'date-fns/setDefaultOptions'
 import { hu } from 'date-fns/locale'
 setDefaultOptions({ locale: hu })
 import { NextPage } from "next";
-import Link from "next/link";
 import axios from "axios";
 
 import Text, { H1, H2, H4, Span } from "../components/Text";
@@ -26,7 +25,7 @@ interface Props {
 }
 
 const StatsPage: NextPage<Props> = ({ id }) => {
-  const { isAuthenticated } = useStoreState(s => s.auth);
+  const { isAuthenticated } = useStoreState((s) => s.auth);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [data, setData] = useState<Record<string, any> | undefined>();
@@ -47,7 +46,7 @@ const StatsPage: NextPage<Props> = ({ id }) => {
         setLoading(false);
         setError(true);
       });
-  }, []);
+  }, [id, isAuthenticated]);
 
   let errorMessage;
 
@@ -91,10 +90,7 @@ const StatsPage: NextPage<Props> = ({ id }) => {
               </H1>
               <Text fontSize={[13, 14]} textAlign="right">
                 {data.target.length > 80
-                  ? `${data.target
-                      .split("")
-                      .slice(0, 80)
-                      .join("")}...`
+                  ? `${data.target.split("").slice(0, 80).join("")}...`
                   : data.target}
               </Text>
             </Flex>
@@ -190,14 +186,12 @@ const StatsPage: NextPage<Props> = ({ id }) => {
               </Col>
             </Col>
             <Box alignSelf="center" my={64}>
-              <Link href="/">
-                <ALink href="/" title="Kezdőoldalra" forButton>
+                <ALink href="/" title="Kezdőoldalra" forButton isNextLink>
                   <Button>
                     <Icon name="arrowLeft" stroke="white" mr={2} />
                     {"Vissza a kezdőoldalra"}
                   </Button>
                 </ALink>
-              </Link>
             </Box>
           </Col>
         ))}
