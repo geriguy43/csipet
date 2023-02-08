@@ -28,10 +28,10 @@ export default function visit({ data }) {
     tasks.push(
       query.visit.add({
         browser: browser.toLowerCase(),
-        country: country || "Unknown",
+        country: country || "Ismeretlen",
         id: data.link.id,
         os: os.toLowerCase().replace(/\s/gi, ""),
-        referrer: (referrer && referrer.replace(/\./gi, "[dot]")) || "Direct"
+        referrer: (referrer && referrer.replace(/\./gi, "[pont]")) || "Direkt"
       })
     );
   }
