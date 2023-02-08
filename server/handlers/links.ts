@@ -83,7 +83,7 @@ export const create: Handler = async (req: CreateLinkReq, res) => {
 
   // Check if custom link already exists
   if (queries[4]) {
-    throw new CustomError("Custom URL is already in use.");
+    throw new CustomError("A megadott egyedi URL már használatban van!");
   }
 
   // Create new link
