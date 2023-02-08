@@ -47,47 +47,47 @@ export const createLink = [
     .isString()
     .trim()
     .isLength({ min: 1, max: 2040 })
-    .withMessage("Maximum URL length is 2040.")
+    .withMessage("Max URL hossz: 2400.")
     .customSanitizer(addProtocol)
     .custom(
       value =>
         urlRegex({ exact: true, strict: false }).test(value) ||
         /^(?!https?)(\w+):\/\//.test(value)
     )
-    .withMessage("URL is not valid.")
+    .withMessage("Az URL helytelen.")
     .custom(value => removeWww(URL.parse(value).host) !== env.DEFAULT_DOMAIN)
     .withMessage(`${env.DEFAULT_DOMAIN} URLs are not allowed.`),
   body("password")
     .optional({ nullable: true, checkFalsy: true })
     .custom(checkUser)
-    .withMessage("Only users can use this field.")
+    .withMessage("Csak regisztrált felhasználóknak!")
     .isString()
     .isLength({ min: 3, max: 64 })
-    .withMessage("Password length must be between 3 and 64."),
+    .withMessage("3 és 64 karakter közötti jelszót adj meg."),
   body("customurl")
     .optional({ nullable: true, checkFalsy: true })
     .custom(checkUser)
-    .withMessage("Only users can use this field.")
+    .withMessage("Csak regisztrált felhasználóknak!")
     .isString()
     .trim()
     .isLength({ min: 1, max: 64 })
-    .withMessage("Custom URL length must be between 1 and 64.")
+    .withMessage("A rövidített URL 1 és 64 karakter közötti hosszúságú lehet.")
     .custom(value => /^[a-zA-Z0-9-_]+$/g.test(value))
-    .withMessage("Custom URL is not valid")
+    .withMessage("Az egyedi URL helytelen")
     .custom(value => !preservedUrls.some(url => url.toLowerCase() === value))
-    .withMessage("You can't use this custom URL."),
+    .withMessage("Ezt az URL-t nem használhatod"),
   body("reuse")
     .optional({ nullable: true })
     .custom(checkUser)
-    .withMessage("Only users can use this field.")
+    .withMessage("Csak regisztrált felhasználóknak!")
     .isBoolean()
-    .withMessage("Reuse must be boolean."),
+    .withMessage("Csak igen/nem!"),
   body("description")
     .optional({ nullable: true, checkFalsy: true })
     .isString()
     .trim()
     .isLength({ min: 0, max: 2040 })
-    .withMessage("Description length must be between 0 and 2040."),
+    .withMessage("A leírás 0 és 2040 karakter közötti hosszúságú lehet"),
   body("expire_in")
     .optional({ nullable: true, checkFalsy: true })
     .isString()
@@ -99,17 +99,17 @@ export const createLink = [
         return false;
       }
     })
-    .withMessage("Expire format is invalid. Valid examples: 1m, 8h, 42 days.")
+    .withMessage("A lejárati formátum helytelen. Példák: 1m, 8h, 42d")
     .customSanitizer(ms)
     .custom(value => value >= ms("1m"))
-    .withMessage("Minimum expire time should be '1 minute'.")
+    .withMessage("A minimum lejárati idő 1 perc.")
     .customSanitizer(value => addMilliseconds(new Date(), value).toISOString()),
   body("domain")
     .optional({ nullable: true, checkFalsy: true })
     .custom(checkUser)
-    .withMessage("Only users can use this field.")
+    .withMessage("Csak regisztrált felhasználóknak!")
     .isString()
-    .withMessage("Domain should be string.")
+    .withMessage("a Domain csak valamely listaelem lehet")
     .customSanitizer(value => value.toLowerCase())
     .customSanitizer(value => removeWww(URL.parse(value).hostname || value))
     .custom(async (address, { req }) => {
@@ -126,7 +126,7 @@ export const createLink = [
 
       if (!domain) return Promise.reject();
     })
-    .withMessage("You can't use this domain.")
+    .withMessage("Ez a domain nem használható.")
 ];
 
 export const editLink = [
@@ -135,14 +135,14 @@ export const editLink = [
     .isString()
     .trim()
     .isLength({ min: 1, max: 2040 })
-    .withMessage("Maximum URL length is 2040.")
+    .withMessage("Maximumm URL hossz: 2040.")
     .customSanitizer(addProtocol)
     .custom(
       value =>
         urlRegex({ exact: true, strict: false }).test(value) ||
         /^(?!https?)(\w+):\/\//.test(value)
     )
-    .withMessage("URL is not valid.")
+    .withMessage("Ez az URL érvénytelen")
     .custom(value => removeWww(URL.parse(value).host) !== env.DEFAULT_DOMAIN)
     .withMessage(`${env.DEFAULT_DOMAIN} URLs are not allowed.`),
   body("address")
@@ -150,11 +150,11 @@ export const editLink = [
     .isString()
     .trim()
     .isLength({ min: 1, max: 64 })
-    .withMessage("Custom URL length must be between 1 and 64.")
+    .withMessage("Az egyedi URL 1 és 64 karakter között lehet.")
     .custom(value => /^[a-zA-Z0-9-_]+$/g.test(value))
-    .withMessage("Custom URL is not valid")
+    .withMessage("Az egyedi URL helytelen")
     .custom(value => !preservedUrls.some(url => url.toLowerCase() === value))
-    .withMessage("You can't use this custom URL."),
+    .withMessage("Ez az URL nem használható."),
   body("expire_in")
     .optional({ nullable: true, checkFalsy: true })
     .isString()
@@ -166,38 +166,38 @@ export const editLink = [
         return false;
       }
     })
-    .withMessage("Expire format is invalid. Valid examples: 1m, 8h, 42 days.")
+    .withMessage("A lejárati formátum helytelen. Példák: 1m, 8h, 42d")
     .customSanitizer(ms)
     .custom(value => value >= ms("1m"))
-    .withMessage("Minimum expire time should be '1 minute'.")
+    .withMessage("A minimum lejárati idő 1 perc.")
     .customSanitizer(value => addMilliseconds(new Date(), value).toISOString()),
   body("description")
     .optional({ nullable: true, checkFalsy: true })
     .isString()
     .trim()
     .isLength({ min: 0, max: 2040 })
-    .withMessage("Description length must be between 0 and 2040."),
-  param("id", "ID is invalid.")
+    .withMessage("A leírás 0 és 2040 karakter között lehet."),
+  param("id", "ID érvénytelen")
     .exists({ checkFalsy: true, checkNull: true })
     .isLength({ min: 36, max: 36 })
 ];
 
 export const redirectProtected = [
-  body("password", "Password is invalid.")
+  body("password", "Jelszó érvénytelen")
     .exists({ checkFalsy: true, checkNull: true })
     .isString()
     .isLength({ min: 3, max: 64 })
-    .withMessage("Password length must be between 3 and 64."),
-  param("id", "ID is invalid.")
+    .withMessage("A jelszó 3 és 64 karakter közötti hosszúságú lehet."),
+  param("id", "ID érvénytelen")
     .exists({ checkFalsy: true, checkNull: true })
     .isLength({ min: 36, max: 36 })
 ];
 
 export const addDomain = [
-  body("address", "Domain is not valid")
+  body("address", "A domain helytelen")
     .exists({ checkFalsy: true, checkNull: true })
     .isLength({ min: 3, max: 64 })
-    .withMessage("Domain length must be between 3 and 64.")
+    .withMessage("A domain 3 és 64 karakter közötti hosszúságú lehet.")
     .trim()
     .customSanitizer(value => {
       const parsed = URL.parse(value);
@@ -205,21 +205,21 @@ export const addDomain = [
     })
     .custom(value => urlRegex({ exact: true, strict: false }).test(value))
     .custom(value => value !== env.DEFAULT_DOMAIN)
-    .withMessage("You can't use the default domain.")
+    .withMessage("Az alap domaint nem használhatod.")
     .custom(async value => {
       const domain = await query.domain.find({ address: value });
       if (domain?.user_id || domain?.banned) return Promise.reject();
     })
-    .withMessage("You can't add this domain."),
+    .withMessage("Ez a domain nem hozzáadható."),
   body("homepage")
     .optional({ checkFalsy: true, nullable: true })
     .customSanitizer(addProtocol)
     .custom(value => urlRegex({ exact: true, strict: false }).test(value))
-    .withMessage("Homepage is not valid.")
+    .withMessage("A honlap érvénytelen.")
 ];
 
 export const removeDomain = [
-  param("id", "ID is invalid.")
+  param("id", "ID érvénytelen")
     .exists({
       checkFalsy: true,
       checkNull: true
@@ -228,7 +228,7 @@ export const removeDomain = [
 ];
 
 export const deleteLink = [
-  param("id", "ID is invalid.")
+  param("id", "ID érvénytelen")
     .exists({
       checkFalsy: true,
       checkNull: true
@@ -237,7 +237,7 @@ export const deleteLink = [
 ];
 
 export const reportLink = [
-  body("link", "No link has been provided.")
+  body("link", "Nincs link biztosítva.")
     .exists({
       checkFalsy: true,
       checkNull: true
@@ -250,7 +250,7 @@ export const reportLink = [
 ];
 
 export const banLink = [
-  param("id", "ID is invalid.")
+  param("id", "ID érvénytelen")
     .exists({
       checkFalsy: true,
       checkNull: true
@@ -279,7 +279,7 @@ export const banLink = [
 ];
 
 export const getStats = [
-  param("id", "ID is invalid.")
+  param("id", "ID érvénytelen")
     .exists({
       checkFalsy: true,
       checkNull: true
@@ -288,16 +288,16 @@ export const getStats = [
 ];
 
 export const signup = [
-  body("password", "Password is not valid.")
+  body("password", "A jelszó helytelen.")
     .exists({ checkFalsy: true, checkNull: true })
     .isLength({ min: 8, max: 64 })
-    .withMessage("Password length must be between 8 and 64."),
-  body("email", "Email is not valid.")
+    .withMessage("A jelszó 8 és 64 karakter közötti hosszúságú lehet."),
+  body("email", "Az email cím helytelen.")
     .exists({ checkFalsy: true, checkNull: true })
     .trim()
     .isEmail()
-    .isLength({ min: 0, max: 255 })
-    .withMessage("Email length must be max 255.")
+    .isLength({ min: 5, max: 255 })
+    .withMessage("az email cím maximum 255 karakter lehet.")
     .custom(async (value, { req }) => {
       const user = await query.user.find({ email: value });
 
@@ -307,53 +307,53 @@ export const signup = [
 
       if (user?.verified) return Promise.reject();
     })
-    .withMessage("You can't use this email address.")
+    .withMessage("Ez az email cím nem használható.")
 ];
 
 export const login = [
-  body("password", "Password is not valid.")
+  body("password", "A jelszó helytelen.")
     .exists({ checkFalsy: true, checkNull: true })
     .isLength({ min: 8, max: 64 })
-    .withMessage("Password length must be between 8 and 64."),
-  body("email", "Email is not valid.")
+    .withMessage("A jelszó 8 és 64 karakter közötti hosszúságú lehet."),
+  body("email", "Az email cím helytelen")
     .exists({ checkFalsy: true, checkNull: true })
     .trim()
     .isEmail()
-    .isLength({ min: 0, max: 255 })
-    .withMessage("Email length must be max 255.")
+    .isLength({ min: 5, max: 255 })
+    .withMessage("Email hossza maximum 255 karakter lehet.")
 ];
 
 export const changePassword = [
-  body("password", "Password is not valid.")
+  body("password", "A jelszó helytelen.")
     .exists({ checkFalsy: true, checkNull: true })
     .isLength({ min: 8, max: 64 })
-    .withMessage("Password length must be between 8 and 64.")
+    .withMessage("A jelszó 8 és 64 karakter közötti hosszúságú lehet.")
 ];
 
 export const resetPasswordRequest = [
-  body("email", "Email is not valid.")
+  body("email", "Az email cím helytelen")
     .exists({ checkFalsy: true, checkNull: true })
     .trim()
     .isEmail()
-    .isLength({ min: 0, max: 255 })
-    .withMessage("Email length must be max 255."),
-  body("password", "Password is not valid.")
+    .isLength({ min: 5, max: 255 })
+    .withMessage("Email hossza maximum 255 karakter lehet."),
+  body("password", "A jelszó helytelen.")
     .exists({ checkFalsy: true, checkNull: true })
     .isLength({ min: 8, max: 64 })
-    .withMessage("Password length must be between 8 and 64.")
+    .withMessage("A jelszó 8 és 64 karakter közötti hosszúságú lehet.")
 ];
 
 export const resetEmailRequest = [
-  body("email", "Email is not valid.")
+  body("email", "Az email cím helytelen.")
     .exists({ checkFalsy: true, checkNull: true })
     .trim()
     .isEmail()
-    .isLength({ min: 0, max: 255 })
-    .withMessage("Email length must be max 255.")
+    .isLength({ min: 5, max: 255 })
+    .withMessage("Email hossza maximum 255 karakter lehet.")
 ];
 
 export const deleteUser = [
-  body("password", "Password is not valid.")
+  body("password", "A jelszó helytelen.")
     .exists({ checkFalsy: true, checkNull: true })
     .isLength({ min: 8, max: 64 })
     .custom(async (password, { req }) => {
@@ -371,7 +371,7 @@ export const cooldown = (user: User) => {
   );
 
   if (hasCooldownNow) {
-    throw new CustomError("Cooldown because of a malware URL. Wait 12h");
+    throw new CustomError("Malware URL beküldése miatt 1 nap pihi!");
   }
 };
 
@@ -418,12 +418,12 @@ export const malware = async (user: User, target: string) => {
     // Ban if too many cooldowns
     if (updatedUser.cooldowns.length > 2) {
       await query.user.update({ id: user.id }, { banned: true });
-      throw new CustomError("Too much malware requests. You are now banned.");
+      throw new CustomError("Túl sok malware. Végleg bannolva...");
     }
   }
 
   throw new CustomError(
-    user ? "Malware detected! Cooldown for 12h." : "Malware detected!"
+    user ? "Malware-t küldtél be, 1 nap pihi..." : "Malware detected!"
   );
 };
 
@@ -437,7 +437,7 @@ export const linksCount = async (user?: User) => {
 
   if (count > env.USER_LIMIT_PER_DAY) {
     throw new CustomError(
-      `You have reached your daily limit (${env.USER_LIMIT_PER_DAY}). Please wait 24h.`
+      `Napi limit... (${env.USER_LIMIT_PER_DAY}). 24h. pihi...`
     );
   }
 };
@@ -449,7 +449,7 @@ export const bannedDomain = async (domain: string) => {
   });
 
   if (isBanned) {
-    throw new CustomError("URL is containing malware/scam.", 400);
+    throw new CustomError("Az URL malware/scam.", 400);
   }
 };
 
@@ -470,6 +470,6 @@ export const bannedHost = async (domain: string) => {
   }
 
   if (isBanned) {
-    throw new CustomError("URL is containing malware/scam.", 400);
+    throw new CustomError("Az URL malware/scam.", 400);
   }
 };

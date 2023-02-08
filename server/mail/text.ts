@@ -1,18 +1,12 @@
 /* eslint-disable max-len */
-export const verifyMailText = `You're attempting to change your email address on {{site_name}}.
-
-Please verify your email address using the link below.
+export const verifyMailText = `{"Az email címed megváltoztatására készülsz a CSI.PET weboldalon. Ha te voltál, kattints a jóváhagyó linkre/gombra alább "}
 
 https://{{domain}}/verify/{{verification}}`;
 
-export const changeEmailText = `Thanks for creating an account on {{site_name}}.
-
-Please verify your email address using the link below.
+export const changeEmailText = `{"Köszönjük, hogy regisztráltál a CSI.PET weboldalra. Az alábbi linkre/gombra kattintva jóváhagyhatod a regisztrációdat "}
 
 https://{{domain}}/verify-email/{{verification}}`;
 
-export const resetMailText = `A password reset has been requested for your account.
-
-Please click on the button below to reset your password. There's no need to take any action if you didn't request this.
+export const resetMailText = `{"A CSI.PET oldalról jelszóreszetelési igény érkezett. Ha te voltál, akkor kattints az alábbi linkre/gombra és hagyd jóvá. Ellenkező esetben nincs teendőd "}
 
 https://{{domain}}/reset-password/{{resetpassword}}`;

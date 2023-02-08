@@ -27,8 +27,8 @@ export const remove: Handler = async (req, res) => {
   redis.remove.domain(domain);
 
   if (!domain) {
-    throw new CustomError("Could not delete the domain.", 500);
+    throw new CustomError("Ez a domain nem törölhető.", 500);
   }
 
-  return res.status(200).send({ message: "Domain deleted successfully" });
+  return res.status(200).send({ message: "A domain sikeresen törölve." });
 };

@@ -46,7 +46,7 @@ export const verification = async (user: User) => {
   const mail = await transporter.sendMail({
     from: env.MAIL_FROM || env.MAIL_USER,
     to: user.email,
-    subject: "Verify your account",
+    subject: "Ellenőrizd fiókodat",
     text: verifyMailText
       .replace(/{{verification}}/gim, user.verification_token)
       .replace(/{{domain}}/gm, env.DEFAULT_DOMAIN)
@@ -58,7 +58,7 @@ export const verification = async (user: User) => {
   });
 
   if (!mail.accepted.length) {
-    throw new CustomError("Couldn't send verification email. Try again later.");
+    throw new CustomError("Jelenleg nem küldhető ellenőrző levél, próbáld újra később.");
   }
 };
 
@@ -66,7 +66,7 @@ export const changeEmail = async (user: User) => {
   const mail = await transporter.sendMail({
     from: env.MAIL_FROM || env.MAIL_USER,
     to: user.change_email_address,
-    subject: "Verify your new email address",
+    subject: "Ellenőrizd email címed",
     text: changeEmailText
       .replace(/{{verification}}/gim, user.change_email_token)
       .replace(/{{domain}}/gm, env.DEFAULT_DOMAIN)
@@ -78,7 +78,7 @@ export const changeEmail = async (user: User) => {
   });
 
   if (!mail.accepted.length) {
-    throw new CustomError("Couldn't send verification email. Try again later.");
+    throw new CustomError("Nem küldhető el az ellenőrző levél, próbáld újra később.");
   }
 };
 
@@ -86,7 +86,7 @@ export const resetPasswordToken = async (user: User) => {
   const mail = await transporter.sendMail({
     from: env.MAIL_FROM || env.MAIL_USER,
     to: user.email,
-    subject: "Reset your password",
+    subject: "Reszeteld a jelszavad",
     text: resetMailText
       .replace(/{{resetpassword}}/gm, user.reset_password_token)
       .replace(/{{domain}}/gm, env.DEFAULT_DOMAIN),
@@ -97,7 +97,7 @@ export const resetPasswordToken = async (user: User) => {
 
   if (!mail.accepted.length) {
     throw new CustomError(
-      "Couldn't send reset password email. Try again later."
+      "A jelszóátállításhoz jelenleg nem küldhető email. Próbáld újra később."
     );
   }
 };

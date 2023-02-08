@@ -30,14 +30,14 @@ const authenticate = (
 
       if (user && isStrict && !user.verified) {
         throw new CustomError(
-          "Your email address is not verified. " +
-            "Click on signup to get the verification link again.",
+          "Email címed nincsen hitelesítve " +
+            "Kattints újra a Regisztráció gombra, hogy ismét megkapd a hitelesítő levelet.",
           400
         );
       }
 
       if (user && user.banned) {
-        throw new CustomError("You're banned from using this website.", 403);
+        throw new CustomError("Bannolva vagy a CSI.PET-en!", 403);
       }
 
       if (user) {
@@ -51,12 +51,12 @@ const authenticate = (
     })(req, res, next);
   };
 
-export const local = authenticate("local", "Login credentials are wrong.");
-export const jwt = authenticate("jwt", "Unauthorized.");
-export const jwtLoose = authenticate("jwt", "Unauthorized.", false);
+export const local = authenticate("local", "A bejelentkezési adataid helytelenek");
+export const jwt = authenticate("jwt", "Nem jóváhagyott.");
+export const jwtLoose = authenticate("jwt", "Nem jóváhagyott.", false);
 export const apikey = authenticate(
   "localapikey",
-  "API key is not correct.",
+  "Az API kulcs helytelen",
   false
 );
 
@@ -74,7 +74,7 @@ export const cooldown: Handler = async (req, res, next) => {
     const timeToWait =
       cooldownConfig - differenceInMinutes(new Date(), new Date(ip.created_at));
     throw new CustomError(
-      `Non-logged in users are limited. Wait ${timeToWait} minutes or log in.`,
+      `Regisztráció nélkül a generálás limitált. Várj ennyit: ${timeToWait} vagy jelentkezz be.`,
       400
     );
   }
@@ -100,7 +100,7 @@ export const recaptcha: Handler = async (req, res, next) => {
   });
 
   if (!isReCaptchaValid.data.success) {
-    throw new CustomError("reCAPTCHA is not valid. Try again.", 401);
+    throw new CustomError("A captcha helytelen, próbáld újra", 401);
   }
 
   return next();
@@ -108,7 +108,7 @@ export const recaptcha: Handler = async (req, res, next) => {
 
 export const admin: Handler = async (req, res, next) => {
   if (req.user.admin) return next();
-  throw new CustomError("Unauthorized", 401);
+  throw new CustomError("Nem jóváhagyott", 401);
 };
 
 export const signup: Handler = async (req, res) => {
@@ -122,7 +122,7 @@ export const signup: Handler = async (req, res) => {
 
   await mail.verification(user);
 
-  return res.status(201).send({ message: "Verification email has been sent." });
+  return res.status(201).send({ message: "Ellenőrző email kiküldve" });
 };
 
 export const token: Handler = async (req, res) => {
@@ -160,12 +160,12 @@ export const changePassword: Handler = async (req, res) => {
   const [user] = await query.user.update({ id: req.user.id }, { password });
 
   if (!user) {
-    throw new CustomError("Couldn't change the password. Try again later.");
+    throw new CustomError("A jelszó jelenleg nem változtatható meg. Próbáld később.");
   }
 
   return res
     .status(200)
-    .send({ message: "Your password has been changed successfully." });
+    .send({ message: "Jelszavad sikeresen megváltozott." });
 };
 
 export const generateApiKey: Handler = async (req, res) => {
@@ -176,7 +176,7 @@ export const generateApiKey: Handler = async (req, res) => {
   const [user] = await query.user.update({ id: req.user.id }, { apikey });
 
   if (!user) {
-    throw new CustomError("Couldn't generate API key. Please try again later.");
+    throw new CustomError("Nem tudtam API kulcsot generálni. Próbáld később.");
   }
 
   return res.status(201).send({ apikey });
@@ -196,7 +196,7 @@ export const resetPasswordRequest: Handler = async (req, res) => {
   }
 
   return res.status(200).send({
-    message: "If email address exists, a reset password email has been sent."
+    message: "Ha létező fiók email címét adtad meg, akkor küldtük a linket a reszeteléshez!"
   });
 };
 
@@ -222,7 +222,7 @@ export const resetPassword: Handler = async (req, res, next) => {
 
 export const signupAccess: Handler = (req, res, next) => {
   if (!env.DISALLOW_REGISTRATION) return next();
-  return res.status(403).send({ message: "Registration is not allowed." });
+  return res.status(403).send({ message: "A regisztráció jelenleg nem lehetséges" });
 };
 
 export const changeEmailRequest: Handler = async (req, res) => {
@@ -231,13 +231,13 @@ export const changeEmailRequest: Handler = async (req, res) => {
   const isMatch = await bcrypt.compare(password, req.user.password);
 
   if (!isMatch) {
-    throw new CustomError("Password is wrong.", 400);
+    throw new CustomError("A jelszó helytelen.", 400);
   }
 
   const currentUser = await query.user.find({ email });
 
   if (currentUser) {
-    throw new CustomError("Can't use this email address.", 400);
+    throw new CustomError("Ez az email cím nem használható.", 400);
   }
 
   const [updatedUser] = await query.user.update(
@@ -257,8 +257,8 @@ export const changeEmailRequest: Handler = async (req, res) => {
 
   return res.status(200).send({
     message:
-      "If email address exists, an email " +
-      "with a verification link has been sent."
+      "Ha az email cím létező, " +
+      "akkor verifikációs levelet küldtünk ki rá."
   });
 };
 
