@@ -80,7 +80,7 @@ const Extensions = () => (
     backgroundColor={Colors.ExtensionsBg}
   >
     <H3 fontSize={[26, 28]} mb={5} color="white" light>
-      Browser extensions.
+      {"Böngésző kiegészítők"}
     </H3>
     <Flex
       width={1200}
@@ -96,7 +96,7 @@ const Extensions = () => (
       >
         <ChromeButton>
           <Icon src="/images/googlechrome.svg" color="#4285f4" />
-          <span>Download for Chrome</span>
+          <span>{"Letöltés Chrome-hoz"}</span>
         </ChromeButton>
       </Link>
       <Link
@@ -106,7 +106,7 @@ const Extensions = () => (
       >
         <FirefoxButton>
           <Icon src="/images/mozillafirefox.svg" color="#e0890f" />
-          <span>Download for Firefox</span>
+          <span>{"Letöltés Firefox-hoz"}</span>
         </FirefoxButton>
       </Link>
     </Flex>

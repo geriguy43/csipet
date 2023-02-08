@@ -1,4 +1,5 @@
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import differenceInMilliseconds from "date-fns/differenceInMilliseconds";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import React, { FC, useState, useEffect } from "react";
 import { useFormState } from "react-use-form-state";
@@ -8,7 +9,6 @@ import { ifProp } from "styled-tools";
 import getConfig from "next/config";
 import QRCode from "qrcode.react";
 import Link from "next/link";
-import differenceInMilliseconds from "date-fns/differenceInMilliseconds";
 import ms from "ms";
 
 import { removeProtocol, withComma, errorMessage } from "../utils";
@@ -26,6 +26,10 @@ import Table from "./Table";
 import ALink from "./ALink";
 import Modal from "./Modal";
 import Icon from "./Icon";
+
+import setDefaultOptions from 'date-fns/setDefaultOptions'
+import { hu } from 'date-fns/locale'
+setDefaultOptions({ locale: hu })
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -198,10 +202,10 @@ const Row: FC<RowProps> = ({ index, link, setDeleteModal }) => {
           </Col>
         </Td>
         <Td {...createdFlex} flexDirection="column" alignItems="flex-start">
-          <Text>{formatDistanceToNow(new Date(link.created_at))} ago</Text>
+          <Text>{formatDistanceToNow(new Date(link.created_at))}{""}</Text>
           {link.expire_in && (
             <Text fontSize={[13, 14]} color="#888">
-              Expires in{" "}
+              {"Lejár:"}
               {ms(
                 differenceInMilliseconds(new Date(link.expire_in), new Date()),
                 {
@@ -249,7 +253,7 @@ const Row: FC<RowProps> = ({ index, link, setDeleteModal }) => {
           {link.password && (
             <>
               <Tooltip id={`${index}-tooltip-password`}>
-                Password protected
+                {"Jelszóval védett"}
               </Tooltip>
               <Action
                 as="span"
@@ -264,7 +268,7 @@ const Row: FC<RowProps> = ({ index, link, setDeleteModal }) => {
           )}
           {link.banned && (
             <>
-              <Tooltip id={`${index}-tooltip-banned`}>Banned</Tooltip>
+              <Tooltip id={`${index}-tooltip-banned`}>{"Tiltott"}</Tooltip>
               <Action
                 as="span"
                 data-tip
@@ -278,7 +282,7 @@ const Row: FC<RowProps> = ({ index, link, setDeleteModal }) => {
           )}
           {link.visit_count > 0 && (
             <Link href={`/stats?id=${link.id}`}>
-              <ALink title="View stats" forButton>
+              <ALink title="Statok" forButton>
                 <Action
                   name="pieChart"
                   stroke={Colors.PieIcon}
@@ -339,12 +343,12 @@ const Row: FC<RowProps> = ({ index, link, setDeleteModal }) => {
                   fontSize={[14, 15]}
                   bold
                 >
-                  Target:
+                  {"Cél"}
                 </Text>
                 <Flex as="form">
                   <TextInput
                     {...text("target")}
-                    placeholder="Target..."
+                    placeholder="Cél..."
                     placeholderSize={[13, 14]}
                     fontSize={[14, 15]}
                     height={[40, 44]}
@@ -368,7 +372,7 @@ const Row: FC<RowProps> = ({ index, link, setDeleteModal }) => {
                 <Flex as="form">
                   <TextInput
                     {...text("address")}
-                    placeholder="Custom address..."
+                    placeholder="Egyedi végződés (opció)"
                     placeholderSize={[13, 14]}
                     fontSize={[14, 15]}
                     height={[40, 44]}
@@ -389,12 +393,12 @@ const Row: FC<RowProps> = ({ index, link, setDeleteModal }) => {
                   fontSize={[14, 15]}
                   bold
                 >
-                  Description:
+                  {"A link leírása"}
                 </Text>
                 <Flex as="form">
                   <TextInput
                     {...text("description")}
-                    placeholder="description..."
+                    placeholder="Leírás (opció)"
                     placeholderSize={[13, 14]}
                     fontSize={[14, 15]}
                     height={[40, 44]}
@@ -413,12 +417,12 @@ const Row: FC<RowProps> = ({ index, link, setDeleteModal }) => {
                   fontSize={[14, 15]}
                   bold
                 >
-                  Expire in:
+                  {"Lejárat, pl: 5m, 24h, 365d (opció)"}
                 </Text>
                 <Flex as="form">
                   <TextInput
                     {...text("expire_in")}
-                    placeholder="2 minutes/hours/days"
+                    placeholder="m=perc, h=óra, d=nap"
                     placeholderSize={[13, 14]}
                     fontSize={[14, 15]}
                     height={[40, 44]}
@@ -442,7 +446,7 @@ const Row: FC<RowProps> = ({ index, link, setDeleteModal }) => {
                 stroke="white"
                 mr={2}
               />
-              {editLoading ? "Updating..." : "Update"}
+              {editLoading ? "Frissítés..." : "Frissít"}
             </Button>
             {editMessage.text && (
               <Text mt={3} fontSize={15} color={editMessage.color}>
@@ -469,16 +473,16 @@ const Row: FC<RowProps> = ({ index, link, setDeleteModal }) => {
       >
         <>
           <H2 mb={24} textAlign="center" bold>
-            Ban link?
+            {"Link tiltása?"}
           </H2>
           <Text mb={24} textAlign="center">
-            Are you sure do you want to ban the link{" "}
+            {"Biztosan tiltani szeretnéd a linket?"}
             <Span bold>"{removeProtocol(link.link)}"</Span>?
           </Text>
           <RowCenter>
-            <Checkbox {...checkbox("user")} label="User" mb={12} />
-            <Checkbox {...checkbox("userLinks")} label="User links" mb={12} />
-            <Checkbox {...checkbox("host")} label="Host" mb={12} />
+            <Checkbox {...checkbox("user")} label="Felh." mb={12} />
+            <Checkbox {...checkbox("userLinks")} label="Felh. linkjei" mb={12} />
+            <Checkbox {...checkbox("host")} label="Hoszt" mb={12} />
             <Checkbox {...checkbox("domain")} label="Domain" mb={12} />
           </RowCenter>
           <Flex justifyContent="center" mt={4}>
@@ -493,11 +497,11 @@ const Row: FC<RowProps> = ({ index, link, setDeleteModal }) => {
             ) : (
               <>
                 <Button color="gray" mr={3} onClick={() => setBanModal(false)}>
-                  Cancel
+                  {"Mégse"}
                 </Button>
                 <Button color="red" ml={3} onClick={onBan}>
                   <Icon name="stop" stroke="white" mr={2} />
-                  Ban
+                  {"Tilt!"}
                 </Button>
               </>
             )}
@@ -519,7 +523,7 @@ const LinksTable: FC = () => {
   const isAdmin = useStoreState(s => s.auth.isAdmin);
   const links = useStoreState(s => s.links);
   const { get, remove } = useStoreActions(s => s.links);
-  const [tableMessage, setTableMessage] = useState("No links to show.");
+  const [tableMessage, setTableMessage] = useState("Nincs mutatható link...");
   const [deleteModal, setDeleteModal] = useState(-1);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [deleteMessage, setDeleteMessage] = useMessage();
@@ -533,7 +537,7 @@ const LinksTable: FC = () => {
 
   useEffect(() => {
     get(options).catch(err =>
-      setTableMessage(err?.response?.data?.error || "An error occurred.")
+      setTableMessage(err?.response?.data?.error || "Hiba történt...")
     );
   }, [options.limit, options.skip, options.all]);
 
@@ -611,7 +615,7 @@ const LinksTable: FC = () => {
   return (
     <Col width={1200} maxWidth="95%" margin="40px 0 120px" my={6}>
       <H2 mb={3} light>
-        Recent shortened links.
+        {"Legutóbbi rövidítések"}
       </H2>
       <Table scrollWidth="800px">
         <thead>
@@ -620,7 +624,7 @@ const LinksTable: FC = () => {
               <Flex as="form" onSubmit={onSubmit}>
                 <TextInput
                   {...text("search")}
-                  placeholder="Search..."
+                  placeholder="Keresés..."
                   height={[30, 32]}
                   placeholderSize={[13, 13, 13, 13]}
                   fontSize={[14]}
@@ -635,7 +639,7 @@ const LinksTable: FC = () => {
                   <Checkbox
                     {...label("all")}
                     {...checkbox("all")}
-                    label="All links"
+                    label="Minden link"
                     ml={3}
                     fontSize={[14, 15]}
                     width={[15, 16]}
@@ -647,10 +651,10 @@ const LinksTable: FC = () => {
             {Nav}
           </Tr>
           <Tr>
-            <Th {...ogLinkFlex}>Original URL</Th>
-            <Th {...createdFlex}>Created</Th>
-            <Th {...shortLinkFlex}>Short URL</Th>
-            <Th {...viewsFlex}>Views</Th>
+            <Th {...ogLinkFlex}>{"Eredeti URL"}</Th>
+            <Th {...createdFlex}>{"Link életkora"}</Th>
+            <Th {...shortLinkFlex}>{"Rövidített URL"}</Th>
+            <Th {...viewsFlex}>{"Klikkek"}</Th>
             <Th {...actionsFlex}></Th>
           </Tr>
         </thead>
@@ -659,7 +663,7 @@ const LinksTable: FC = () => {
             <Tr width={1} justifyContent="center">
               <Td flex="1 1 auto" justifyContent="center">
                 <Text fontSize={18} light>
-                  {links.loading ? "Loading links..." : tableMessage}
+                  {links.loading ? "Linkek betöltése..." : tableMessage}
                 </Text>
               </Td>
             </Tr>
@@ -688,10 +692,10 @@ const LinksTable: FC = () => {
         {linkToDelete && (
           <>
             <H2 mb={24} textAlign="center" bold>
-              Delete link?
+            {"Link törlése"}
             </H2>
             <Text textAlign="center">
-              Are you sure do you want to delete the link{" "}
+            {"Biztosan törölni szeretnéd a linket?"}
               <Span bold>"{removeProtocol(linkToDelete.link)}"</Span>?
             </Text>
             <Flex justifyContent="center" mt={44}>
@@ -710,11 +714,11 @@ const LinksTable: FC = () => {
                     mr={3}
                     onClick={() => setDeleteModal(-1)}
                   >
-                    Cancel
+                    {"Mégse"}
                   </Button>
                   <Button color="red" ml={3} onClick={onDelete}>
                     <Icon name="trash" stroke="white" mr={2} />
-                    Delete
+                    {"Törlés"}
                   </Button>
                 </>
               )}

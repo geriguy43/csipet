@@ -39,8 +39,8 @@ const VerifyEmail: NextPage<Props> = ({ token }) => {
         />
         <H2 textAlign="center" normal>
           {token
-            ? "Email address verified successfully."
-            : "Couldn't verify the email address."}
+            ? "Az email cím jóváhagyása sikeres!"
+            : "Nem hitelesíthető az email cím!"}
         </H2>
       </Flex>
       <Footer />

@@ -37,7 +37,7 @@ const SettingsChangeEmail: FC = () => {
       );
       setMessage(res.data.message, "green");
     } catch (error) {
-      setMessage(error?.response?.data?.error || "Couldn't send email.");
+      setMessage(error?.response?.data?.error || "Nem tudom elküldeni a levelet...");
     }
     setLoading(false);
   };
@@ -45,7 +45,7 @@ const SettingsChangeEmail: FC = () => {
   return (
     <Col alignItems="flex-start" maxWidth="100%">
       <H2 mb={4} bold>
-        Change email address
+        {"Az email cím megváltoztatása"}
       </H2>
       <Col alignItems="flex-start" onSubmit={onSubmit} width={1} as="form">
         <Flex width={1} flexDirection={["column", "row"]}>
@@ -57,11 +57,11 @@ const SettingsChangeEmail: FC = () => {
               fontSize={[15, 16]}
               bold
             >
-              Password:
+              {"Jelszavad:"}
             </Text>
             <TextInput
               {...password("changeemailpass")}
-              placeholder="Password..."
+              placeholder="Jelszó..."
               maxWidth="240px"
               required
             />
@@ -74,11 +74,11 @@ const SettingsChangeEmail: FC = () => {
               fontSize={[15, 16]}
               bold
             >
-              New email address:
+              {"Új email cím:"}
             </Text>
             <TextInput
               {...email("changeemailaddress")}
-              placeholder="john@examaple.com"
+              placeholder="valami@valami.hu"
               flex="1 1 auto"
               maxWidth="240px"
             />
@@ -86,7 +86,7 @@ const SettingsChangeEmail: FC = () => {
         </Flex>
         <Button type="submit" color="blue" mt={[24, 3]} disabled={loading}>
           <Icon name={loading ? "spinner" : "refresh"} mr={2} stroke="white" />
-          {loading ? "Sending..." : "Update"}
+          {loading ? "Küldés..." : "Mehet!"}
         </Button>
       </Col>
       <Text fontSize={15} color={message.color} mt={3}>

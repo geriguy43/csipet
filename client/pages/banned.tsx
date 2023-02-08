@@ -15,17 +15,17 @@ const BannedPage = () => {
     <AppWrapper>
       <Col flex="1 1 100%" alignItems="center">
         <H2 textAlign="center" my={3} normal>
-          Link has been banned and removed because of{" "}
+          {"A link eltávolításra került, mert "}
           <Span style={{ borderBottom: "1px dotted rgba(0, 0, 0, 0.4)" }} bold>
-            malware or scam
+            {"malware-t vagy spam-et tartalmazott!"}
           </Span>
           .
         </H2>
         <H4 textAlign="center" normal>
-          If you noticed a malware/scam link shortened by{" "}
-          {publicRuntimeConfig.SITE_NAME},{" "}
+          {"Ha a "}
+          {publicRuntimeConfig.SITE_NAME}{" által rövidített linken spam-et vagy malware-t találsz, "}
           <Link href="/report">
-            <ALink title="Send report">send us a report</ALink>
+            <ALink title="Send report">{"Küldj nekünk bejelentést!"}</ALink>
           </Link>
           .
         </H4>

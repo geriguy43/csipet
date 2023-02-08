@@ -1,6 +1,9 @@
 import { Box, Flex } from "reflexbox/styled-components";
 import React, { useState, useEffect } from "react";
 import formatDate from "date-fns/format";
+import setDefaultOptions from 'date-fns/setDefaultOptions'
+import { hu } from 'date-fns/locale'
+setDefaultOptions({ locale: hu })
 import { NextPage } from "next";
 import Link from "next/link";
 import axios from "axios";
@@ -52,7 +55,7 @@ const StatsPage: NextPage<Props> = ({ id }) => {
     errorMessage = (
       <Flex mt={3}>
         <Icon name="x" size={32} mr={3} stroke={Colors.TrashIcon} />
-        <H2>You need to login to view stats.</H2>
+        <H2>{"Be kell jelentkezned a statisztikák megtekintéséhez"}</H2>
       </Flex>
     );
   }
@@ -61,7 +64,7 @@ const StatsPage: NextPage<Props> = ({ id }) => {
     errorMessage = (
       <Flex mt={3}>
         <Icon name="x" size={32} mr={3} stroke={Colors.TrashIcon} />
-        <H2>Couldn't get stats.</H2>
+        <H2>{"A statisztikák nem érhetők el."}</H2>
       </Flex>
     );
   }
@@ -70,8 +73,8 @@ const StatsPage: NextPage<Props> = ({ id }) => {
 
   const total = stats && stats.views.reduce((sum, view) => sum + view, 0);
   const periodText = period.includes("last")
-    ? `the last ${period.replace("last", "").toLocaleLowerCase()}`
-    : "all time";
+    ? `az utóbbi ${period.replace("lastDay", "nap").replace("lastWeek", "hét").replace("lastMonth", "hónap")}`
+    : "a kezdetektől";
 
   return (
     <AppWrapper>
@@ -81,8 +84,8 @@ const StatsPage: NextPage<Props> = ({ id }) => {
           <Col width={1200} maxWidth="95%" alignItems="stretch" m="40px 0">
             <Flex justifyContent="space-between" alignItems="center" mb={3}>
               <H1 fontSize={[18, 20, 24]} light>
-                Stats for:{" "}
-                <ALink href={data.link} title="Short link">
+                {"Statok ehhez: "}
+                <ALink href={data.link} title="Rövid link">
                   {removeProtocol(data.link)}
                 </ALink>
               </H1>
@@ -111,14 +114,14 @@ const StatsPage: NextPage<Props> = ({ id }) => {
                 px={[3, 4]}
               >
                 <H4>
-                  Total clicks: <Span bold>{data.total}</Span>
+                <span>Klikkek mindeddig:{data.total}</span>
                 </H4>
                 <Flex>
                   {[
-                    ["allTime", "All Time"],
-                    ["lastMonth", "Month"],
-                    ["lastWeek", "Week"],
-                    ["lastDay", "Day"]
+                    ["allTime", "Mindeddig"],
+                    ["lastMonth", "E hó"],
+                    ["lastWeek", "E hét"],
+                    ["lastDay", "Ma"]
                   ].map(([p, n]) => (
                     <NavButton
                       ml={10}
@@ -141,11 +144,11 @@ const StatsPage: NextPage<Props> = ({ id }) => {
                   >
                     {total}
                   </Span>{" "}
-                  tracked clicks in {periodText}.
+                  {"Nézet: "}{periodText}
                 </H2>
                 <Text fontSize={[13, 14]} color={Colors.StatsLastUpdateText}>
-                  Last update in{" "}
-                  {formatDate(new Date(data.updatedAt), "hh:mm aa")}
+                  {"Utolsó frissítés: "}
+                  {formatDate(new Date(data.updatedAt), "H:mm")}
                 </Text>
                 <Flex width={1} mt={4}>
                   <Area data={stats.views} period={period} />
@@ -156,13 +159,13 @@ const StatsPage: NextPage<Props> = ({ id }) => {
                     <Flex width={1}>
                       <Col flex="1 1 0">
                         <H2 mb={3} light>
-                          Referrals.
+                          {"Ajánlók (ref.)"}
                         </H2>
                         <Pie data={stats.stats.referrer} />
                       </Col>
                       <Col flex="1 1 0">
                         <H2 mb={3} light>
-                          Browsers.
+                          {"Böngészők"}
                         </H2>
                         <Bar data={stats.stats.browser} />
                       </Col>
@@ -171,13 +174,13 @@ const StatsPage: NextPage<Props> = ({ id }) => {
                     <Flex width={1}>
                       <Col flex="1 1 0">
                         <H2 mb={3} light>
-                          Country.
+                          {"Ország"}
                         </H2>
                         <Map data={stats.stats.country} />
                       </Col>
                       <Col flex="1 1 0">
                         <H2 mb={3} light>
-                          OS.
+                          {"Oprendszer"}
                         </H2>
                         <Bar data={stats.stats.os} />
                       </Col>
@@ -188,10 +191,10 @@ const StatsPage: NextPage<Props> = ({ id }) => {
             </Col>
             <Box alignSelf="center" my={64}>
               <Link href="/">
-                <ALink href="/" title="Back to homepage" forButton>
+                <ALink href="/" title="Kezdőoldalra" forButton>
                   <Button>
                     <Icon name="arrowLeft" stroke="white" mr={2} />
-                    Back to homepage
+                    {"Vissza a kezdőoldalra"}
                   </Button>
                 </ALink>
               </Link>

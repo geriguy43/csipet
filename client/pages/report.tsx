@@ -27,10 +27,10 @@ const ReportPage = () => {
     setMessage();
     try {
       await axios.post(`${APIv2.Links}/report`, { link: formState.values.url });
-      setMessage("Thanks for the report, we'll take actions shortly.", "green");
+      setMessage("Köszönjük a bejelentés, hamarosan megtesszük a megfelelő lépéseket", "green");
       formState.clear();
     } catch (error) {
-      setMessage(error?.response?.data?.error || "Couldn't send report.");
+      setMessage(error?.response?.data?.error || "Nem tudtam elküldeni a bejelentést!");
     }
 
     setLoading(false);
@@ -40,17 +40,16 @@ const ReportPage = () => {
     <AppWrapper>
       <Col width={600} maxWidth="97%" alignItems="flex-start">
         <H2 my={3} bold>
-          Report abuse
+          {"Jelentsd a visszaélést"}
         </H2>
         <Text mb={3}>
-          Report abuses, malware and phishing links to the below email address
-          or use the form. We will take actions shortly.
+          {"Jelentsd be a visszaélést, malware-t, adatlopást célzó linket az alábbi email címen, vagy használd hozzá az itt megjelenő űrlapot. A bejelentést rövidesen megvizsgáljuk"}
         </Text>
         <Text mb={4}>
           {(publicRuntimeConfig.REPORT_EMAIL || "").replace("@", "[at]")}
         </Text>
         <Text mb={3}>
-          <Span bold>URL containing malware/scam:</Span>
+          <Span bold>{"A káros URL:"}</Span>
         </Text>
         <Flex
           as="form"
@@ -70,7 +69,7 @@ const ReportPage = () => {
           />
           <Button type="submit" flex="0 0 auto" height={[40, 44]} mt={[3, 0]}>
             {loading && <Icon name={"spinner"} stroke="white" mr={2} />}
-            Send report
+            {"Bejelentés"}
           </Button>
         </Flex>
         <Text fontSize={14} mt={3} color={message.color}>

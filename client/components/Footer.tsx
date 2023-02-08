@@ -26,11 +26,7 @@ const Footer: FC = () => {
     >
       {!isAuthenticated && <ReCaptcha />}
       <Text fontSize={[12, 13]} py={2}>
-        Made with love by{" "}
-        <ALink href="//thedevs.network/" title="The Devs">
-          The Devs
-        </ALink>
-        .{" | "}
+        {"Szeretettel készítették: "}
         <ALink
           href="https://github.com/thedevs-network/kutt"
           title="GitHub"
@@ -39,21 +35,21 @@ const Footer: FC = () => {
           GitHub
         </ALink>
         {" | "}
-        <ALink href="/terms" title="Terms of Service">
-          Terms of Service
+        <ALink href="/terms" title="Felhasználási feltételek">
+          {"Felhasználási feltételek"}
         </ALink>
         {" | "}
-        <ALink href="/report" title="Report abuse">
-          Report Abuse
+        <ALink href="/report" title="Visszaélés bejelentése">
+          {"Visszaélés bejelentése"}
         </ALink>
         {publicRuntimeConfig.CONTACT_EMAIL && (
           <>
             {" | "}
             <ALink
               href={`mailto:${publicRuntimeConfig.CONTACT_EMAIL}`}
-              title="Contact us"
+              title="Lépj kapcsolatba velünk"
             >
-              Contact us
+              {"Lépj kapcsolatba velünk"}
             </ALink>
           </>
         )}

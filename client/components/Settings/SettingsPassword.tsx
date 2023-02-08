@@ -37,7 +37,7 @@ const SettingsPassword: FC = () => {
       formState.clear();
       setMessage(res.data.message, "green");
     } catch (err) {
-      setMessage(err?.response?.data?.error || "Couldn't update the password.");
+      setMessage(err?.response?.data?.error || "Nem tudom frissíteni a jelszót...");
     }
     setLoading(false);
   };
@@ -45,9 +45,9 @@ const SettingsPassword: FC = () => {
   return (
     <Col alignItems="flex-start" maxWidth="100%">
       <H2 mb={4} bold>
-        Change password
+        {"Jelszó megváltoztatása"}
       </H2>
-      <Text mb={4}>Enter a new password to change your current password.</Text>
+      <Text mb={4}>{"Írd be a kívánt új jelszót a régi megváltoztatásához."}</Text>
       <Text
         {...label("password")}
         as="label"
@@ -55,7 +55,7 @@ const SettingsPassword: FC = () => {
         fontSize={[15, 16]}
         bold
       >
-        New password:
+          {"Új jelszavad:"}
       </Text>
       <Flex as="form" onSubmit={onSubmit}>
         <TextInput
@@ -64,19 +64,19 @@ const SettingsPassword: FC = () => {
             validate: value => {
               const val = value.trim();
               if (!val || val.length < 8) {
-                return "Password must be at least 8 chars.";
+                return "A jelszónak minimum 8 karakter hosszúságúnak kell lennie!";
               }
             }
           })}
           autocomplete="off"
-          placeholder="New password..."
+          placeholder="Új jelszó..."
           width={[1, 2 / 3]}
           mr={3}
           required
         />
         <Button type="submit" disabled={loading}>
           <Icon name={loading ? "spinner" : "refresh"} mr={2} stroke="white" />
-          {loading ? "Updating..." : "Update"}
+          {loading ? "Frissítés..." : "Mehet!"}
         </Button>
       </Flex>
       <Text color={message.color} mt={3} fontSize={15}>

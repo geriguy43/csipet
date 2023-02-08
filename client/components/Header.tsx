@@ -58,11 +58,11 @@ const Header: FC = () => {
       <Link href="/login">
         <ALink
           href="/login"
-          title={!DISALLOW_REGISTRATION ? "login / signup" : "login"}
+          title={!DISALLOW_REGISTRATION ? "Bejelentkezés / Regisztráció" : "Bejelentkezés"}
           forButton
         >
           <Button height={[32, 40]}>
-            {!DISALLOW_REGISTRATION ? "Log in / Sign up" : "Log in"}
+            {!DISALLOW_REGISTRATION ? "Bejelentkezés / Regisztráció" : "Bejelentkezés"}
           </Button>
         </ALink>
       </Link>
@@ -71,8 +71,8 @@ const Header: FC = () => {
   const logout = isAuthenticated && (
     <Li>
       <Link href="/logout">
-        <ALink href="/logout" title="logout" fontSize={[14, 16]}>
-          Log out
+        <ALink href="/logout" title="Kilép" fontSize={[14, 16]}>
+          {"Kilép"}
         </ALink>
       </Link>
     </Li>
@@ -80,8 +80,8 @@ const Header: FC = () => {
   const settings = isAuthenticated && (
     <Li>
       <Link href="/settings">
-        <ALink href="/settings" title="Settings" forButton>
-          <Button height={[32, 40]}>Settings</Button>
+        <ALink href="/settings" title="Beállítások" forButton>
+          <Button height={[32, 40]}>{"Beállítások"}</Button>
         </ALink>
       </Link>
     </Li>
@@ -104,7 +104,7 @@ const Header: FC = () => {
         <LogoImage>
           <a
             href="/"
-            title="Homepage"
+            title="Kezdőlap"
             onClick={e => {
               e.preventDefault();
               if (window.location.pathname !== "/") Router.push("/");
@@ -125,20 +125,9 @@ const Header: FC = () => {
             p={0}
           >
             <Li>
-              <ALink
-                href="//github.com/thedevs-network/kutt"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="GitHub"
-                fontSize={[14, 16]}
-              >
-                GitHub
-              </ALink>
-            </Li>
-            <Li>
               <Link href="/report">
-                <ALink href="/report" title="Report abuse" fontSize={[14, 16]}>
-                  Report
+                <ALink href="/report" title="Visszaélés beelentése" fontSize={[14, 16]}>
+                  {"Visszaélés bejelentése"}
                 </ALink>
               </Link>
             </Li>
@@ -155,8 +144,8 @@ const Header: FC = () => {
         <Li>
           <Flex display={["flex", "none"]}>
             <Link href="/report">
-              <ALink href="/report" title="Report" fontSize={[14, 16]}>
-                Report
+              <ALink href="/report" title="Visszaélés bejelentése" fontSize={[14, 16]}>
+                {"Jelentés"}
               </ALink>
             </Link>
           </Flex>

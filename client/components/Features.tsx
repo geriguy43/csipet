@@ -14,8 +14,8 @@ const Features = () => (
     py={[64, 100]}
     backgroundColor={Colors.FeaturesBg}
   >
-    <H3 fontSize={[26, 28]} mb={72} light>
-      Kutting edge features.
+    <H3 fontSize={[26, 28]} mb={72} mx={15} light>
+      {"Bónusz! rövidített linkedet a CSI.RIP előtaggal is eléred. Például a csi.pet/xyz helyett használhatod a csi.rip/xyz formulát is."}
     </H3>
     <Flex
       width={1200}
@@ -24,18 +24,17 @@ const Features = () => (
       justifyContent="center"
       flexWrap={["wrap", "wrap", "wrap", "nowrap"]}
     >
-      <FeaturesItem title="Managing links" icon="edit">
-        Create, protect and delete your links and monitor them with detailed
-        statistics.
+      <FeaturesItem title="Linkek kezelése" icon="edit">
+        {"Rövidítsd linkjeidet, nézd meg, hányan kattintottak rájuk."}
       </FeaturesItem>
-      <FeaturesItem title="Custom domain" icon="shuffle">
-        Use custom domains for your links. Add or remove them for free.
+      <FeaturesItem title="Több domain" icon="shuffle">
+        {"Több domain közül választhatssz. csi.pet/linked vagy csi.rip/linked"}
       </FeaturesItem>
-      <FeaturesItem title="API" icon="zap">
-        Use the provided API to create, delete, and get URLs from anywhere.
+      <FeaturesItem title="Van már fiókod?" icon="zap">
+        {"Regisztrálj, hogy elérd a speciális funkciókat!"}
       </FeaturesItem>
-      <FeaturesItem title="Free &amp; open source" icon="heart">
-        Completely open source and free. You can host it on your own server.
+      <FeaturesItem title="Ingyenes" icon="heart">
+        {"Teljesen ingyenes és az is marad!"}
       </FeaturesItem>
     </Flex>
   </ColCenterH>

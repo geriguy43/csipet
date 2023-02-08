@@ -32,7 +32,7 @@ class AppDocument extends Document<Props> {
           />
           <meta
             name="description"
-            content={`${publicRuntimeConfig.SITE_NAME} is a free and open source URL shortener with custom domains and stats.`}
+            content={"A CSI.PET egy modern, nyílt forráskódú, multifunkciós és teljesen ingyenes URL rövidítő."}
           />
           <link
             href="https://fonts.googleapis.com/css?family=Nunito:300,400,700"
@@ -59,7 +59,7 @@ class AppDocument extends Document<Props> {
           />
           <meta
             property="og:description"
-            content="Free & Open Source Modern URL Shortener"
+            content="Modern, ingyenes URL rövidítő"
           />
           <meta
             name="twitter:url"
@@ -68,7 +68,7 @@ class AppDocument extends Document<Props> {
           <meta name="twitter:title" content={publicRuntimeConfig.SITE_NAME} />
           <meta
             name="twitter:description"
-            content="Free & Open Source Modern URL Shortener"
+            content="Modern, ingyenes URL rövidítő"
           />
           <meta
             name="twitter:image"

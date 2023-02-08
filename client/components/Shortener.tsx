@@ -91,7 +91,7 @@ const Shortener = () => {
       formState.clear();
     } catch (err) {
       setMessage(
-        err?.response?.data?.error || "Couldn't create the short link."
+        err?.response?.data?.error || "Nem tudtam elkészíteni a rövidített linket."
       );
     }
     setLoading(false);
@@ -130,9 +130,9 @@ const Shortener = () => {
 
   const title = !link && (
     <H1 fontSize={[25, 27, 32]} light>
-      Kutt your links{" "}
+      {"CSI.PET, a fejlett és ingyenes "}
       <Span style={{ borderBottom: "2px dotted #999" }} light>
-        shorter
+        {"linkrövidítő"}
       </Span>
       .
     </H1>
@@ -201,7 +201,7 @@ const Shortener = () => {
       >
         <TextInput
           {...text("target")}
-          placeholder="Paste your long URL"
+          placeholder="Ide illeszd be a hosszú URL-ed"
           placeholderSize={[16, 17, 18]}
           fontSize={[18, 20, 22]}
           aria-label="target"
@@ -235,7 +235,7 @@ const Shortener = () => {
           onChange: e => {
             if (!isAuthenticated) {
               setMessage(
-                "You need to log in or sign up to use advanced options."
+                "Be kell jelentkezned a részletes beállítási lehetőségek eléréséhez!"
               );
               return false;
             }
@@ -243,7 +243,7 @@ const Shortener = () => {
           }
         })}
         checked={formState.values.showAdvanced}
-        label="Show advanced options"
+        label="Részletes beállítási lehetőségek"
         mt={[3, 24]}
         alignSelf="flex-start"
       />
@@ -258,7 +258,7 @@ const Shortener = () => {
                 mb={2}
                 bold
               >
-                Domain:
+                {"Domain:"}
               </Text>
               <Select
                 {...select("domain")}
@@ -289,7 +289,7 @@ const Shortener = () => {
               </Text>
               <TextInput
                 {...text("customurl")}
-                placeholder="Custom address..."
+                placeholder="Egyedi végződés..."
                 autocomplete="off"
                 data-lpignore
                 pl={[3, 24]}
@@ -308,11 +308,11 @@ const Shortener = () => {
                 mb={2}
                 bold
               >
-                Password:
+                {"Jelszavazott link:"}
               </Text>
               <TextInput
                 {...password("password")}
-                placeholder="Password..."
+                placeholder="Jelszó... (opció)"
                 autocomplete="off"
                 data-lpignore
                 pl={[3, 24]}
@@ -333,11 +333,11 @@ const Shortener = () => {
                 mb={2}
                 bold
               >
-                Expire in:
+                {"Lejárati idő, pl: 10m, 24h, 30d"}
               </Text>
               <TextInput
                 {...text("expire_in")}
-                placeholder="2 minutes/hours/days"
+                placeholder="Formátum: m=perc, h=óra, d=nap (opció)"
                 data-lpignore
                 pl={[3, 24]}
                 pr={[3, 24]}
@@ -356,11 +356,11 @@ const Shortener = () => {
                 mb={2}
                 bold
               >
-                Description:
+                {"Leírás a linkhez:"}
               </Text>
               <TextInput
                 {...text("description")}
-                placeholder="Description"
+                placeholder="Leiírás (opció)"
                 data-lpignore
                 pl={[3, 24]}
                 pr={[3, 24]}

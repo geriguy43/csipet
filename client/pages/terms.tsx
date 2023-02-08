@@ -10,54 +10,23 @@ const TermsPage = () => (
   <AppWrapper>
     {/* TODO: better container */}
     <Col width={600} maxWidth="97%" alignItems="flex-start">
-      <h3>{publicRuntimeConfig.SITE_NAME} Terms of Service</h3>
-      <p>
-        By accessing the website at{" "}
-        <a href={`https://${publicRuntimeConfig.DEFAULT_DOMAIN}`}>
-          https://{publicRuntimeConfig.DEFAULT_DOMAIN}
-        </a>
-        , you are agreeing to be bound by these terms of service, all applicable
-        laws and regulations, and agree that you are responsible for compliance
-        with any applicable local laws. If you do not agree with any of these
-        terms, you are prohibited from using or accessing this site. The
-        materials contained in this website are protected by applicable
-        copyright and trademark law.
+      <h3>{"CSI.PET felhasználási feltételek"}</h3>
+      <p>{"A CSI.PET weboldalra való belépéssel elfogadod, hogy a jelen szolgáltatási feltételek, az összes alkalmazandó törvény és szabályozás kötelező érvényű, és elfogadod, hogy felelős vagy az alkalmazandó helyi (magyar) törvények betartásáért. Ha nem értesz egyet a jelen feltételek bármelyikével, tilos a webhelyet használnod vagy ahhoz hozzáférned, megnyitnod. A weboldalon található anyagok a vonatkozó szerzői jogi és védjegyjogok védelme alatt állnak."}
       </p>
       <p>
-        In no event shall {publicRuntimeConfig.SITE_NAME} or its suppliers be
-        liable for any damages (including, without limitation, damages for loss
-        of data or profit, or due to business interruption) arising out of the
-        use or inability to use the materials on{" "}
-        {publicRuntimeConfig.DEFAULT_DOMAIN} website, even if{" "}
-        {publicRuntimeConfig.SITE_NAME} or a {publicRuntimeConfig.SITE_NAME}{" "}
-        authorized representative has been notified orally or in writing of the
-        possibility of such damage. Because some jurisdictions do not allow
-        limitations on implied warranties, or limitations of liability for
-        consequential or incidental damages, these limitations may not apply to
-        you.
+        {"A CSI.PET vagy annak beszállítói semmilyen esetben sem vállalnak felelősséget a CSI.PET weboldalon található anyagok használatából vagy használhatatlanságából eredő károkért (beleértve, de nem kizárólagosan az adatvesztésből vagy nyereségkiesésből, illetve az üzletmenet megszakításából eredő károkat), még akkor sem, ha a CSI.PET-et vagy a CSI.PET felhatalmazott képviselőjét szóban vagy írásban értesítették az ilyen kár lehetőségéről. Mivel egyes joghatóságok nem engedélyezik a hallgatólagos szavatosság korlátozását, illetve a következményes vagy véletlen károkért való felelősség korlátozását, előfordulhat, hogy ezek a korlátozások nem vonatkoznak rád. Ebben az esetben az oldal használata TILOS! A CSI.PET weboldalon megjelenő anyagok technikai, tipográfiai vagy fényképészeti hibákat tartalmazhatnak."}
       </p>
       <p>
-        The materials appearing on {publicRuntimeConfig.SITE_NAME} website could
-        include technical, typographical, or photographic errors.{" "}
-        {publicRuntimeConfig.SITE_NAME} does not warrant that any of the
-        materials on its website are accurate, complete or current.{" "}
-        {publicRuntimeConfig.SITE_NAME} may make changes to the materials
-        contained on its website at any time without notice. However{" "}
-        {publicRuntimeConfig.SITE_NAME} does not make any commitment to update
-        the materials.
+        {"A CSI.PET nem szavatolja, hogy a CSI.PET weboldalán található anyagok pontosak, teljesek vagy aktuálisak. A CSI.PET bármikor, előzetes értesítés nélkül módosíthatja a weboldalán található anyagokat. A CSI.PET azonban nem vállal kötelezettséget az anyagok frissítésére."}
       </p>
       <p>
-        {publicRuntimeConfig.SITE_NAME} has not reviewed all of the sites linked
-        to its website and is not responsible for the contents of any such
-        linked site. The inclusion of any link does not imply endorsement by{" "}
-        {publicRuntimeConfig.SITE_NAME} of the site. Use of any such linked
-        website is at the {"user's"} own risk.
+        {"A CSI.PET nem tekintette át a weboldalához kapcsolódó egyik webhelyet sem, és nem vállal felelősséget az ilyen hivatkozott webhelyek tartalmáért. Ezeket a felhasználók generálták. Bármely link megjelenítése nem jelenti azt, hogy a CSI.PET jóváhagyta az adott oldalt. A hivatkozott webhelyek használata a felhasználó saját felelősségére történik."}
       </p>
       <p>
-        {publicRuntimeConfig.SITE_NAME} may revise these terms of service for
-        its website at any time without notice. By using this website you are
-        agreeing to be bound by the then current version of these terms of
-        service.
+        {"A CSI.PET a jövőben felülvizsgálhatja ezeket a szolgáltatási feltételeket, weboldalának használati feltételeit bármikor, előzetes értesítés nélkül módosíthatja. A weboldal használatával beleegyezel, és elfogadod hogy a jelen felhasználási feltételek mindenkor aktuális verziója kötelező érvényűek rád nézve."}
+      </p>
+       <p>
+        {"A CSI.PET nonprofit, privát fejlesztés, üzemeltetője: Blaskó Gergely. A CSI.PET az open source KUTT projekten alapul. GitHub link a footerben."}
       </p>
     </Col>
   </AppWrapper>

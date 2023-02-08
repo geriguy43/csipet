@@ -2,6 +2,9 @@ import subMonths from "date-fns/subMonths";
 import subHours from "date-fns/subHours";
 import formatDate from "date-fns/format";
 import subDays from "date-fns/subDays";
+import setDefaultOptions from 'date-fns/setDefaultOptions'
+import { hu } from 'date-fns/locale'
+setDefaultOptions({ locale: hu })
 import React, { FC } from "react";
 import {
   AreaChart,
@@ -25,14 +28,14 @@ const ChartArea: FC<Props> = ({ data: rawData, period }) => {
       case "allTime":
         return formatDate(
           subMonths(now, rawData.length - index - 1),
-          "MMM yyy"
+          "yyy MMM", { locale: hu }
         );
       case "lastDay":
-        return formatDate(subHours(now, rawData.length - index - 1), "HH:00");
+        return formatDate(subHours(now, rawData.length - index - 1), "H:00",);
       case "lastMonth":
       case "lastWeek":
       default:
-        return formatDate(subDays(now, rawData.length - index - 1), "MMM dd");
+        return formatDate(subDays(now, rawData.length - index - 1), "MMM dd", { locale: hu });
     }
   };
   const data = rawData.map((view, index) => ({
