@@ -15,8 +15,9 @@ const Features = () => (
   >
     <H3 fontSize={[26, 28]} mb={72} mx={15} light>
       {"Újdonság! Küldj AES256 titkosítású, önmegsemmisülő üzenetet vagy fájlt 2 MB-ig"}<br/>
-      
-      
+      <Link href="/login" title="login / signup">
+      HTTPS://TITOK.CSI.PET
+      </Link>
     </H3>
     <Flex
       width={1200}
