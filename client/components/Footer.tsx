@@ -11,7 +11,7 @@ import Text from "./Text";
 const { publicRuntimeConfig } = getConfig();
 
 const Footer: FC = () => {
-  const { isAuthenticated } = useStoreState(s => s.auth);
+  const { isAuthenticated } = useStoreState((s) => s.auth);
 
   useEffect(() => {
     showRecaptcha();
@@ -35,11 +35,11 @@ const Footer: FC = () => {
           GitHub
         </ALink>
         {" | "}
-        <ALink href="/terms" title="Felhasználási feltételek">
+        <ALink href="/terms" title="Felhasználási feltételek"  isNextLink>
           {"Felhasználási feltételek"}
         </ALink>
         {" | "}
-        <ALink href="/report" title="Visszaélés bejelentése">
+        <ALink href="/report" title="Visszaélés bejelentése"  isNextLink>
           {"Visszaélés bejelentése"}
         </ALink>
         {publicRuntimeConfig.CONTACT_EMAIL && (
