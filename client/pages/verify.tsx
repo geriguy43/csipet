@@ -1,9 +1,8 @@
-import { Flex } from "reflexbox/styled-components";
+import { Flex } from "rebass/styled-components";
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import decode from "jwt-decode";
 import cookie from "js-cookie";
-import Link from "next/link";
 
 import AppWrapper from "../components/AppWrapper";
 import { Button } from "../components/Button";
@@ -35,7 +34,7 @@ const Message = styled.p`
 `;
 
 const Verify: NextPage<Props> = ({ token }) => {
-  const addAuth = useStoreActions(s => s.auth.add);
+  const addAuth = useStoreActions((s) => s.auth.add);
 
   useEffect(() => {
     if (token) {
@@ -43,7 +42,7 @@ const Verify: NextPage<Props> = ({ token }) => {
       const payload: TokenPayload = decode(token);
       addAuth(payload);
     }
-  }, []);
+  }, [token, addAuth]);
 
   return (
     <AppWrapper>
@@ -53,14 +52,12 @@ const Verify: NextPage<Props> = ({ token }) => {
             <Icon name="check" size={32} mr={3} stroke={Colors.CheckIcon} />
             <Message>{"A fiókod sikeresen hitelesítésre került"}</Message>
           </MessageWrapper>
-          <Link href="/">
-            <ALink href="/" forButton>
+            <ALink href="/" forButton isNextLink>
               <Button>
                 <Icon name="arrowLeft" stroke="white" mr={2} />
                 {"Kezdőlapra"}
               </Button>
             </ALink>
-          </Link>
         </Col>
       ) : (
         <Col alignItems="center">
@@ -68,14 +65,12 @@ const Verify: NextPage<Props> = ({ token }) => {
             <Icon name="x" size={32} mr={3} stroke={Colors.TrashIcon} />
             <Message>{"Érvénytelen hitelesítés!"}</Message>
           </MessageWrapper>
-          <Link href="/login">
-            <ALink href="/login" forButton>
+            <ALink href="/login" forButton isNextLink>
               <Button color="purple">
                 <Icon name="arrowLeft" stroke="white" mr={2} />
                 {"Újraregisztrálás"}
               </Button>
-            </ALink>
-          </Link>
+          </ALink>
         </Col>
       )}
     </AppWrapper>
