@@ -53,10 +53,10 @@ const SettingsDeleteAccount: FC = () => {
   return (
     <Col alignItems="flex-start" maxWidth="100%">
       <H2 mb={4} bold>
-        {"Fiók törlése"}
+        Delete account
       </H2>
       <Text mb={4}>
-        {"Fiók törlése a következő oldalról: "} {publicRuntimeConfig.SITE_NAME}.
+        Delete your account from {publicRuntimeConfig.SITE_NAME}.
       </Text>
       <Text
         {...label("password")}
@@ -65,18 +65,18 @@ const SettingsDeleteAccount: FC = () => {
         fontSize={[15, 16]}
         bold
       >
-        {"Jelszavad:"}
+        Password:
       </Text>
       <RowCenterV as="form" onSubmit={onSubmit}>
         <TextInput
           {...password("accpass")}
-          placeholder="Jelszó..."
+          placeholder="Password..."
           autocomplete="off"
           mr={3}
         />
         <Button color="red" type="submit" disabled={loading}>
           <Icon name={loading ? "spinner" : "trash"} mr={2} stroke="white" />
-          {"Törlés"}
+          Delete
         </Button>
       </RowCenterV>
       <Modal
@@ -86,11 +86,11 @@ const SettingsDeleteAccount: FC = () => {
       >
         <>
           <H2 mb={24} textAlign="center" bold>
-            {"Biztosan törlöd a fiókod?"}
+            Delete account?
           </H2>
           <Text textAlign="center">
-            {"Összes adatod, - beleértve a "}<Span bold>linkeket</Span>{" és a"}
-            <Span bold>statokat</Span>{" - törlésre kerülnek."}
+            All of your data including your <Span bold>LINKS</Span> and{" "}
+            <Span bold>STATS</Span> will be deleted.
           </Text>
           <RowCenterH mt={44}>
             {loading ? (
@@ -104,11 +104,11 @@ const SettingsDeleteAccount: FC = () => {
             ) : (
               <>
                 <Button color="gray" mr={3} onClick={() => setModal(false)}>
-                  {"Mégse"}
+                  Cancel
                 </Button>
                 <Button color="red" ml={3} onClick={onDelete}>
                   <Icon name="trash" stroke="white" mr={2} />
-                  {"Törlés"}
+                  Delete
                 </Button>
               </>
             )}
