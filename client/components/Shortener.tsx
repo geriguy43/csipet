@@ -288,7 +288,7 @@ const Shortener = () => {
               </Text>
               <TextInput
                 {...text("customurl")}
-                placeholder="Egyedi végződés..."
+                placeholder="Egyedi végződés... (opció)"
                 autocomplete="off"
                 data-lpignore
                 pl={[3, 24]}
@@ -332,11 +332,11 @@ const Shortener = () => {
                 mb={2}
                 bold
               >
-                {"Lejárati idő, pl: 10m, 24h, 30d"}
+                {"Lejárati idő, pl.: 10m, 24h, 365d"}
               </Text>
               <TextInput
                 {...text("expire_in")}
-                placeholder="Formátum: m=perc, h=óra, d=nap (opció)"
+                placeholder="m=perc, h=óra (opció)"
                 data-lpignore
                 pl={[3, 24]}
                 pr={[3, 24]}
@@ -359,7 +359,7 @@ const Shortener = () => {
               </Text>
               <TextInput
                 {...text("description")}
-                placeholder="Leiírás (opció)"
+                placeholder="Leiírás... (opció)"
                 data-lpignore
                 pl={[3, 24]}
                 pr={[3, 24]}
