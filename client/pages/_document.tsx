@@ -24,7 +24,7 @@ class AppDocument extends Document<Props> {
 
   render() {
     return (
-      <html lang="en">
+      <html lang="hu">
         <Head>
           <meta charSet="utf-8" />
           <meta
@@ -33,7 +33,7 @@ class AppDocument extends Document<Props> {
           />
           <meta
             name="description"
-            content={"A CSI.PET egy modern, nyílt forráskódú, multifunkciós és teljesen ingyenes URL rövidítő."}
+            content={"A CSIPET egy ingyenes, reklámmentes linkrövidítő rengeteg funkcióval. Válaszható utótag, QR kód, jelszó, lejárat, statisztikai adatok. Próbáld ki MOST!"}
           />
           <link
             href="https://fonts.googleapis.com/css?family=Nunito:300,400,700&display=optional"
