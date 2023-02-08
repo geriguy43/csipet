@@ -1,10 +1,10 @@
 {
-  "name": "Kutt",
-  "short_name": "Kutt",
+  "name": "CSI.PET, a modern és fejlett linkrövidítő",
+  "short_name": "CSI.PET",
   "theme_color": "#f3f3f3",
   "background_color": "#f3f3f3",
   "display": "standalone",
-  "description": "Kutt.it is a free and open source URL shortener with custom domains and stats.",
+  "description": "CSI.PET, a magyar linkrövidítő metrikákkal, káros-link szűrővel, jelszavas védelmi és önmegsemmisítő link opciókkal",
   "Scope": "/",
   "start_url": "/",
   "icons": [
