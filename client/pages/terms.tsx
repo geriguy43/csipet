@@ -4,8 +4,6 @@ import React from "react";
 import AppWrapper from "../components/AppWrapper";
 import { Col } from "../components/Layout";
 
-const { publicRuntimeConfig } = getConfig();
-
 const TermsPage = () => (
   <AppWrapper>
     {/* TODO: better container */}
