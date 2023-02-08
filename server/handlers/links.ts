@@ -83,7 +83,7 @@ export const create: Handler = async (req: CreateLinkReq, res) => {
 
   // Check if custom link already exists
   if (queries[4]) {
-    throw new CustomError("A megadott egyedi URL már használatban van!");
+    throw new CustomError("Ez az egyedi URL már használatban van!");
   }
 
   // Create new link
@@ -110,7 +110,7 @@ export const create: Handler = async (req: CreateLinkReq, res) => {
 export const edit: Handler = async (req, res) => {
   const { address, target, description, expire_in, password } = req.body;
   if (!address && !target) {
-    throw new CustomError("Should at least update one field.");
+    throw new CustomError("Legalább egy mezőt szerkesztened kell!");
   }
 
   const link = await query.link.find({
@@ -119,7 +119,7 @@ export const edit: Handler = async (req, res) => {
   });
 
   if (!link) {
-    throw new CustomError("Link was not found.");
+    throw new CustomError("A link nem található");
   }
 
   const targetDomain = utils.removeWww(URL.parse(target).hostname);
