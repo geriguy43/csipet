@@ -147,8 +147,6 @@ export const editLink = [
     .withMessage(`${env.DEFAULT_DOMAIN} URLs are not allowed.`),
     body("password")
     .optional({ nullable: true, checkFalsy: true })
-    .custom(checkUser)
-    .withMessage("Csak regisztrált felhasználók használhatják ezt a mezőt")
     .isString()
     .isLength({ min: 3, max: 64 })
     .withMessage("A jelszónak 3 és 64 karakter közötti hosszúságúnak kell lennie."),
