@@ -67,7 +67,7 @@ class MyApp extends App<any> {
       <>
         <Head>
           <title>
-            {publicRuntimeConfig.SITE_NAME} | {" Modern, nyílt forráskódú URL / linkrövidítő"}
+            {publicRuntimeConfig.SITE_NAME}{" linkrövidítő | URL / link rövidítése számos opcióval"}
           </title>
         </Head>
         <StoreProvider store={this.store}>
