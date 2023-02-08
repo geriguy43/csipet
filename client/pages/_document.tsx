@@ -19,7 +19,7 @@ class AppDocument extends Document<Props> {
       (App) => (props) => sheet.collectStyles(<App {...props} />)
     );
     const styleTags = sheet.getStyleElement();
-    return { ...page, styleTags };
+    return { ...initialProps, ...page, styleTags };
   }
 
   render() {
