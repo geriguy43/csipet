@@ -14,7 +14,9 @@ const Features = () => (
     backgroundColor={Colors.FeaturesBg}
   >
     <H3 fontSize={[26, 28]} mb={72} mx={15} light>
-      {"Bónusz! rövidített linkedet a CSI.RIP előtaggal is eléred. Például a csi.pet/xyz helyett használhatod a csi.rip/xyz formulát is."}
+      {"Újdonság! Küldj AES256 titkosítású, önmegsemmisülő üzenetet vagy fájlt 2 MB-ig"}<br/>
+      
+      
     </H3>
     <Flex
       width={1200}
@@ -24,16 +26,16 @@ const Features = () => (
       flexWrap={["wrap", "wrap", "wrap", "nowrap"]}
     >
       <FeaturesItem title="Linkek kezelése" icon="edit">
-        {"Rövidítsd linkjeidet, nézd meg, hányan kattintottak rájuk."}
+        {"Rövidítsd linkjeidet, nézd meg, hányan és honnan kattintottak rájuk."}
       </FeaturesItem>
-      <FeaturesItem title="Több domain" icon="shuffle">
-        {"Több domain közül választhatssz. csi.pet/linked vagy csi.rip/linked"}
+      <FeaturesItem title="Egyedi URL, QR kód" icon="shuffle">
+        {"Linkek jelszavas védelme, lejárati idő beállítása, leírás megadása."}
       </FeaturesItem>
       <FeaturesItem title="Van már fiókod?" icon="zap">
-        {"Regisztrálj, hogy elérd a speciális funkciókat!"}
+        {"Regisztrálj, hogy elérd a speciális funkciókat."}
       </FeaturesItem>
       <FeaturesItem title="Ingyenes" icon="heart">
-        {"Teljesen ingyenes és az is marad!"}
+        {"Teljesen ingyenes, reklámmentes és az is marad!"}
       </FeaturesItem>
     </Flex>
   </ColCenterH>
