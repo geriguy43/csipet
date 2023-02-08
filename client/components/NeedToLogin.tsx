@@ -67,6 +67,7 @@ const NeedToLogin = () => (
       </Title>
       <Link href="/login" title="Bejelentkezés / regisztráció">
         <Button>{"Bejelentkezés/regisztráció"}</Button>
+      </Link>
     </Col>
     <Image src="/images/callout.png" alt="hívókép"  />
   </Wrapper>
