@@ -1,5 +1,4 @@
 import App, { AppContext } from "next/app";
-import Script from "next/script";
 import { StoreProvider } from "easy-peasy";
 import getConfig from "next/config";
 import Router from "next/router";
@@ -71,20 +70,6 @@ class MyApp extends App<any> {
             {publicRuntimeConfig.SITE_NAME}{" linkrövidítő | URL / link rövidítése számos opcióval"}
           </title>
         </Head>
-        {/* Global Site Tag (gtag.js) - Google Analytics */}
-
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=G-2NQ8VXYLQG`}
-            strategy="afterInteractive"
-          />
-          <Script id="google-analytics" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){window.dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-2NQ8VXYLQG');
-            `}
-          </Script>
         
         <StoreProvider store={this.store}>
           <Component {...pageProps} />
