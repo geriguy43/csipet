@@ -296,18 +296,32 @@ export const redirect = (app: ReturnType<typeof next>): Handler => async (
     return res.redirect("/banned");
   }
 
-  // 5. If wants to see link info, then redirect
+  // 5. Append query string when provided
+  if (req.query) {
+    const linkTargetParams = new URLSearchParams(link.target);
+
+    Object.entries(req.query).forEach(([key, value]) => {
+      if (typeof value === "string") {
+        linkTargetParams.append(key, value);
+      }
+    });
+
+    // toString() encodes original url, decode it back
+    link.target = decodeURIComponent(linkTargetParams.toString());
+  }
+
+  // 6. If wants to see link info, then redirect
   const doesRequestInfo = /.*\+$/gi.test(req.params.id);
   if (doesRequestInfo && !link.password) {
     return app.render(req, res, "/url-info", { target: link.target });
   }
 
-  // 6. If link is protected, redirect to password page
+  // 7. If link is protected, redirect to password page
   if (link.password) {
     return res.redirect(`/protected/${link.uuid}`);
   }
 
-  // 7. Create link visit
+  // 8. Create link visit
   if (link.user_id && !isBot) {
     queue.visit.add({
       headers: req.headers,
@@ -318,7 +332,7 @@ export const redirect = (app: ReturnType<typeof next>): Handler => async (
   }
 
 
-  // 8. Redirect to target
+  // 9. Redirect to target
   return res.redirect(link.target);
 };
 
