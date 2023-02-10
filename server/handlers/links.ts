@@ -309,7 +309,6 @@ export const redirect = (app: ReturnType<typeof next>): Handler => async (
       }
     });
 
-    // toString() encodes original url, decode it back
     if (added) {
       url.search = linkTargetParams.toString();
       link.target = URL.format(url);
