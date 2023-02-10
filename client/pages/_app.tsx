@@ -71,24 +71,21 @@ class MyApp extends App<any> {
             {publicRuntimeConfig.SITE_NAME}{" linkrövidítő | URL / link rövidítése számos opcióval"}
           </title>
         </Head>
-                      {/* Global Site Tag (gtag.js) - Google Analytics */}
-      <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=G-2NQ8VXYLQG`}
-      />
-      <Script
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-2NQ8VXYLQG', {
-              page_path: window.location.pathname,
-            });
-          `,
-        }}
-      />
+        {/* Global Site Tag (gtag.js) - Google Analytics */}
+
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=G-2NQ8VXYLQG`}
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){window.dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-2NQ8VXYLQG');
+            `}
+          </Script>
+        
         <StoreProvider store={this.store}>
           <Component {...pageProps} />
         </StoreProvider>
