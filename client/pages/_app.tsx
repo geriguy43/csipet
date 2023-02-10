@@ -67,7 +67,11 @@ class MyApp extends App<any> {
     return (
       <>
         <Head>
-              {/* Global Site Tag (gtag.js) - Google Analytics */}
+          <title>
+            {publicRuntimeConfig.SITE_NAME}{" linkrövidítő | URL / link rövidítése számos opcióval"}
+          </title>
+        </Head>
+                      {/* Global Site Tag (gtag.js) - Google Analytics */}
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=G-2NQ8VXYLQG`}
@@ -85,10 +89,6 @@ class MyApp extends App<any> {
           `,
         }}
       />
-          <title>
-            {publicRuntimeConfig.SITE_NAME}{" linkrövidítő | URL / link rövidítése számos opcióval"}
-          </title>
-        </Head>
         <StoreProvider store={this.store}>
           <Component {...pageProps} />
         </StoreProvider>
