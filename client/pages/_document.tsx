@@ -26,6 +26,24 @@ class AppDocument extends Document<Props> {
     return (
       <html lang="hu">
         <Head>
+          		 {/* Global Site Tag (gtag.js) - Google Analytics */}
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=G-2NQ8VXYLQG`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-2NQ8VXYLQG', {
+              page_path: window.location.pathname,
+            });
+          `,
+            }}
+          />
+          
           <meta charSet="utf-8" />
           <meta
             name="viewport"
