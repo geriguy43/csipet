@@ -31,7 +31,7 @@ const authenticate = (
       if (user && isStrict && !user.verified) {
         throw new CustomError(
           "Email címed nincsen hitelesítve " +
-            "Kattints újra a Regisztráció gombra, hogy ismét megkapd a hitelesítő levelet.",
+          "Kattints újra a Regisztráció gombra, hogy ismét megkapd a hitelesítő levelet.",
           400
         );
       }
@@ -111,7 +111,7 @@ export const admin: Handler = async (req, res, next) => {
   throw new CustomError("Nem jóváhagyott", 401);
 };
 
-export const signup: Handler = async (req, res) => {
+export const signup: Handler = async (req, res, next) => {
   const salt = await bcrypt.genSalt(12);
   const password = await bcrypt.hash(req.body.password, salt);
 
@@ -119,10 +119,29 @@ export const signup: Handler = async (req, res) => {
     { email: req.body.email, password },
     req.user
   );
-
-  await mail.verification(user);
-
-  return res.status(201).send({ message: "Ellenőrző email kiküldve" });
+   if (!env.MAIL_HOST) {
+    const [user_verified] = await query.user.update(
+      {
+        verification_token: user.verification_token,
+        verification_expires: [">", new Date().toISOString()]
+      },
+      {
+        verified: true,
+        verification_token: null,
+        verification_expires: null
+      }
+    );
+   
+    if (user_verified) {
+      const token = utils.signToken(user);
+      req.token = token;
+    }
+    return next();
+  }
+  else {
+    await mail.verification(user);
+    return res.status(201).send({ message: "Felhasználói fiók elkészítve" });
+  }
 };
 
 export const token: Handler = async (req, res) => {

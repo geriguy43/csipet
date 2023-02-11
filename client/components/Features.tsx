@@ -14,7 +14,7 @@ const Features = () => (
     backgroundColor={Colors.FeaturesBg}
   >
     <H3 textAlign="center" fontSize={[26, 28]} mb={12} mx={15} light>
-      {"Új! TITOK.CSI.PET - Küldj AES256 titkosítású, önmegsemmisülő üzenetet vagy fájlt 2 MB-ig"}
+      {"Új! TITOK.CSI.PET - Küldj AES256 titkosítású, önmegsemmisülő üzenetet vagy fájlt 10 MB-ig"}
     </H3>
     <H4 textAlign="center" fontSize={[26, 28]} mb={82} mx={15} light>
           <ALink href="https://titok.csi.pet" title="titok.csi.pet" isNextLink>
@@ -37,8 +37,8 @@ const Features = () => (
       <FeaturesItem title="Van már fiókod?" icon="zap">
         {"Regisztrálj, hogy elérd a speciális funkciókat."}
       </FeaturesItem>
-      <FeaturesItem title="Ingyenes" icon="heart">
-        {"Teljesen ingyenes, reklámmentes és az is marad!"}
+      <FeaturesItem title="Ingyenes, biztonságos" icon="heart">
+        {"A szolgáltatás teljesen ingyenes. A káros linkeket Google Safe Browsing scripttel és manuálisan is szűrjük!"}
       </FeaturesItem>
     </Flex>
   </ColCenterH>

@@ -70,6 +70,7 @@ class MyApp extends App<any> {
             {publicRuntimeConfig.SITE_NAME}{" linkrövidítő | URL / link rövidítése számos opcióval"}
           </title>
         </Head>
+        
         <StoreProvider store={this.store}>
           <Component {...pageProps} />
         </StoreProvider>
