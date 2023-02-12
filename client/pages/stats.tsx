@@ -110,7 +110,7 @@ const StatsPage: NextPage<Props> = ({ id }) => {
                 px={[3, 4]}
               >
                 <H4>
-                <span>Klikkek mindeddig:{data.total}</span>
+                  {"Klikkek mindeddig":}<Span bold>{data.total}</Span>
                 </H4>
                 <Flex>
                   {[
@@ -140,7 +140,7 @@ const StatsPage: NextPage<Props> = ({ id }) => {
                   >
                     {total}
                   </Span>{" "}
-                  {"Nézet: "}{periodText}
+                  {" darab klikk, nézet: "}{periodText}
                 </H2>
                 <Text fontSize={[13, 14]} color={Colors.StatsLastUpdateText}>
                   {"Utolsó frissítés: "}
