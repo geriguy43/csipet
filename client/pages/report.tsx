@@ -27,7 +27,7 @@ const ReportPage = () => {
     setMessage();
     try {
       await axios.post(`${APIv2.Links}/report`, { link: formState.values.url });
-      setMessage("Köszönjük a bejelentés, hamarosan megtesszük a megfelelő lépéseket", "green");
+      setMessage("Köszönjük a bejelentést, hamarosan megtesszük a megfelelő lépéseket", "green");
       formState.clear();
     } catch (error) {
       setMessage(error?.response?.data?.error || "Nem tudtam elküldeni a bejelentést!");
@@ -60,7 +60,7 @@ const ReportPage = () => {
         >
           <TextInput
             {...text("url")}
-            placeholder={`${publicRuntimeConfig.DEFAULT_DOMAIN}/example`}
+            placeholder={`${publicRuntimeConfig.DEFAULT_DOMAIN}/pelda`}
             height={[44, 54]}
             width={[1, 1 / 2]}
             flex="0 0 auto"
