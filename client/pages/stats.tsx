@@ -110,7 +110,7 @@ const StatsPage: NextPage<Props> = ({ id }) => {
                 px={[3, 4]}
               >
                 <H4>
-                  {"Klikkek mindeddig":}<Span bold>{data.total}</Span>
+                  {"Klikkek mindeddig:" }<Span bold>{data.total}</Span>
                 </H4>
                 <Flex>
                   {[
