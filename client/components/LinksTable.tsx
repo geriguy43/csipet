@@ -7,7 +7,6 @@ import { Flex } from "rebass/styled-components";
 import styled, { css } from "styled-components";
 import { ifProp } from "styled-tools";
 import getConfig from "next/config";
-import QRCode from "qrcode.react";
 import ms from "ms";
 
 import { removeProtocol, withComma, errorMessage } from "../utils";
@@ -29,6 +28,22 @@ import Icon from "./Icon";
 import setDefaultOptions from 'date-fns/setDefaultOptions'
 import { hu } from 'date-fns/locale'
 setDefaultOptions({ locale: hu })
+
+/*****
+Enhanced QRCode
+    - allows QR to one-click download
+    - Changed the QR icon in the Links Table. To restore, change name from 'qrcode2' back to 'qrcode'
+    - implement react-qrcode-logo v2.6.0
+Logo accecepts URL image link and base64 image.
+    - URL based not recommended as it taints the image with improper CORS
+    - To replace base64 logo, edit the ./Icon/QRCode2Base64.tsx file
+    - To remove logo, delete the attribute logoImage={QRCode2Base64} in the QRDownload component
+*/
+import { QRCode } from "react-qrcode-logo";
+import QRCode2Base64 from "./Icon/QRCode2Base64";
+import QRDownload from "./QRDownload";
+// End Enhanced QRCode
+
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -150,6 +165,22 @@ const Row: FC<RowProps> = ({ index, link, setDeleteModal }) => {
   const [editLoading, setEditLoading] = useState(false);
   const [editMessage, setEditMessage] = useMessage();
 
+  //downloadable QR code one-click function
+  const downloadQR = () => {
+    const canvas = document.getElementById("link-qr") as HTMLCanvasElement;
+    if(canvas) {
+      const pngUrl = canvas
+        .toDataURL("image/png")
+        .replace("image/png", "image/octet-stream");
+      let downloadLink = document.createElement("a");
+      downloadLink.href = pngUrl;
+      downloadLink.download = "qr-code-" + link.address + ".png";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
+  };  
+  
   const onCopy = () => {
     setCopied(true);
     setTimeout(() => {
@@ -298,7 +329,7 @@ const Row: FC<RowProps> = ({ index, link, setDeleteModal }) => {
             </ALink>
           )}
           <Action
-            name="qrcode"
+            name="qrcode2"
             stroke="none"
             fill={Colors.QrCodeIcon}
             backgroundColor={Colors.QrCodeIconBg}
@@ -495,7 +526,18 @@ const Row: FC<RowProps> = ({ index, link, setDeleteModal }) => {
         closeHandler={() => setQRModal(false)}
       >
         <RowCenter width={192}>
-          <QRCode size={192} value={link.link} />
+            <QRDownload onClick={downloadQR}>
+              <span>&#11015;</span>
+              <QRCode
+                size={192}
+                value={link.link}
+                id="link-qr" eyeRadius={5}
+                logoImage={QRCode2Base64}
+                logoWidth={40}
+                logoHeight={50}
+                enableCORS={false}
+              />
+            </QRDownload>
         </RowCenter>
       </Modal>
       <Modal
