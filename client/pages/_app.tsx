@@ -67,7 +67,7 @@ class MyApp extends App<any> {
       <>
         <Head>
           <title>
-            {publicRuntimeConfig.SITE_NAME}{" linkrövidítő | URL / link rövidítése számos opcióval"}
+            {publicRuntimeConfig.SITE_NAME}{" linkrövidítő | URL / link rövidítése, QR-kód generálása"}
           </title>
         </Head>
         
