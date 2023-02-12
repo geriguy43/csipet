@@ -234,7 +234,7 @@ const Shortener = () => {
           onChange: () => {
             if (!isAuthenticated) {
               setMessage(
-                "Be kell jelentkezned a részletes beállítási lehetőségek eléréséhez!"
+                "Regisztrálnod vagy be kell jelentkezned a részletes beállítások (QR generálás, egyedi végződés, jelszó, lejárati idő, statisztikák) eléréséhez!"
               );
               return false;
             }
@@ -336,7 +336,7 @@ const Shortener = () => {
               </Text>
               <TextInput
                 {...text("expire_in")}
-                placeholder="m=perc, h=óra (opció)"
+                placeholder="m=perc h=óra d=nap (opció)"
                 data-lpignore
                 pl={[3, 24]}
                 pr={[3, 24]}
