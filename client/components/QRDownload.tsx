@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 //downloadable QR code show arrow on hover
 const QRDownload = styled.a`
