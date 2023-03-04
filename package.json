@@ -82,7 +82,7 @@
     "recharts": "^2.1.16",
     "redis": "^4.5.0",
     "signale": "^1.4.0",
-    "styled-components": "^5.3.6",
+    "styled-components": "^5.3.7",
     "styled-tools": "^1.7.2",
     "url-regex-safe": "^3.0.0",
     "use-media": "^1.4.0",
